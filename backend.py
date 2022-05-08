@@ -17,4 +17,22 @@ class Event:
         self.recurring = recurring #needs to be a "recurring type" with weekly/daily/etc
         self.description = description
 
-class Course:
+class Course(Event):
+
+   def __init__(self, start_time, end_time, start_date, end_date, event_name, recurring, description):
+       super().__init__(start_time, end_time, start_date, end_date, event_name, recurring, description)
+       self.
+
+
+
+class Meeting(Event):
+
+   def __init__(self, start_time, end_time, start_date, end_date, event_name, recurring, description):
+       super().__init__(start_time, end_time, start_date, end_date, event_name, recurring, description)
+       self.
+
+
+class Personal(Event):
+
+   def __init__(self, start_time, end_time, start_date, end_date, event_name, recurring, description):
+       super().__init__(start_time, end_time, start_date, end_date, event_name, recurring, description)
