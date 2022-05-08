@@ -1,5 +1,14 @@
+
+import time
+import numpy
+import calendar
+
+
+class Day:
+
 class Event:
-    def __init__(self, start_time, end_time, start_date, end_date, event_name, recurring, description) -> None:
+   
+    def __init__(self, start_time, end_time, start_date, end_date, event_name, recurring, description):
         self.start_time = start_time
         self.end_time = end_time
         self.start_date = start_date
@@ -8,4 +17,4 @@ class Event:
         self.recurring = recurring #needs to be a "recurring type" with weekly/daily/etc
         self.description = description
 
-    
+class Course:
