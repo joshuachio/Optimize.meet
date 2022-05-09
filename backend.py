@@ -1,7 +1,4 @@
-from msilib.schema import ReserveCost
 import time
-
-from django.conf import ENVIRONMENT_VARIABLE
 import numpy
 import calendar
 import datetime
@@ -89,9 +86,9 @@ class Day:
       keyOrder = list(self.eventList.keys())
       keyOrder.sort()
       for time in keyOrder:
-         self.display(self.eventList[time].event_name)
+         self.display(time, self.eventList[time].event_name)
    
-   def display(self):
+   def display(self, time: datetime.time, eventName):
       ##some frontend for displaying stuff
       None
 
