@@ -8,13 +8,29 @@ import datetime
 
 
 
+days = {
+   0:'Monday'
+   1:'Tuesday'
+   2:'Wednesday'
+   3:'Thursday'
+   4:'Friday'
+   5:'Saturday'
+   6:'Sunday'
+}
+   
+   
+   
+   
+   
+
+
 
 class Recurring:
 
    def __init__(self, type):
-      if type == 0:
+      if type == 1:
          self.reccurance = "DAILY"
-      elif type == 1:
+      elif type == 2:
          self.reccurance = "WEEKLY"
 
 class Event:
