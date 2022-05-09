@@ -6,16 +6,16 @@ import datetime
 
 
 days = {
-   0:'Monday'
-   1:'Tuesday'
-   2:'Wednesday'
-   3:'Thursday'
-   4:'Friday'
-   5:'Saturday'
+   0:'Monday',
+   1:'Tuesday',
+   2:'Wednesday',
+   3:'Thursday',
+   4:'Friday',
+   5:'Saturday',
    6:'Sunday'
 }
    
-   
+
    
    
    
@@ -90,9 +90,9 @@ class Personal(Event):
 
 class Day:
    
-   def __init__(self,day: datetime.date,dayofweek):
+   def __init__(self, day: datetime.date, dayofweek):
        self.day = day
-       self.dayofweek = days[day]
+       self.dayofweek = days[dayofweek]
        self.eventList = {}
 
    def addToEventList(self, addEvent: Event):
@@ -109,5 +109,31 @@ class Day:
       ##some frontend for displaying stuff
       None
 
+
+class Month:
+   def __init__(self, month: datetime.month):
+      self.month = month #an integer (1-12) representing the month
+      self.daysList = {}
+
+   def addDays(self, day: Day):
+      self.daysList[day.day.day] = day #just maps the day (1-31) to that Day object
+
+   def display(self):
+      #display the month visually
+      pass
+
+class Year:
+   def __init__(self, year: datetime.year):
+      self.year = year
+      self.monthsList = {}
+
+   def addMonth(self, month: Month):
+      self.daysList[month.month] = month
+
+   def display(self):
+      #display the year visually
+      pass
+
+   
    
 
