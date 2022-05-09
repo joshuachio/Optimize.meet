@@ -94,7 +94,10 @@ class Day:
        self.day = day
        self.dayofweek = days[dayofweek]
        self.eventList = {}
-
+   
+   def dayofweek(self):
+      return self.dayofweek
+   
    def addToEventList(self, addEvent: Event):
       if (addEvent.start_date is self.day):
          self.eventList[addEvent.start_time] = (addEvent)
