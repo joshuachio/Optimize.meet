@@ -93,8 +93,9 @@ class Personal(Event):
 
 class Day:
    
-   def __init__(self,day: datetime.date):
+   def __init__(self,day: datetime.date,dayofweek):
        self.day = day
+       self.dayofweek = days[day]
        self.eventList = {}
 
    def addToEventList(self, addEvent: Event):
