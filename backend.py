@@ -31,16 +31,6 @@ for y in range(2022, 2026):
     calendar[y] = yearDict
 
 taskList = {}
-
-# days = {
-#    0:'Monday',
-#    1:'Tuesday',
-#    2:'Wednesday',
-#    3:'Thursday',
-#    4:'Friday',
-#    5:'Saturday',
-#    6:'Sunday'
-# }
    
 repeat = {
    1: datetime.timedelta(days=1),
@@ -142,66 +132,4 @@ def showAvailibility(startDay: datetime.datetime, endDay: datetime.datetime, sho
          break
       startDay += tdelta
 
-
-# class Day:
-   
-#    def __init__(self, day: datetime.date, dayofweek):
-#        self.day = day
-#        self.dayofweek = days[dayofweek]
-#        self.eventList = {}
-   
-#    def dayofweek(self):
-#       return self.dayofweek
-   
-#    def addToEventList(self, addEvent: Event):
-#       if (addEvent.start_date is self.day):
-#          self.eventList[addEvent.start_time] = (addEvent)
-
-#    def displayEvents(self):
-#       keyOrder = list(self.eventList.keys())
-#       keyOrder.sort()
-#       for time in keyOrder:
-#          self.display(time, self.eventList[time].event_name)
-   
-#    def display(self, time: datetime.time, eventName):
-#       ##some frontend for displaying stuff
-#       None
-
-
-# class Month:
-#    def __init__(self, month, year):     
-#       self.month = month #an integer (1-12) representing the month
-#       self.daysList = [None]
-#       if month == 4 or month == 6 or month == 9 or month == 11:
-#          pass
-#       elif month == 28 or month == 29:
-#          pass
-#       else:
-#          for i in range(1, 32):
-#             tempDate = datetime.date(year, month, i)
-#             temp = Day(tempDate, )
-#             self.daysList.append(temp)
-
-
-
-#    def addDays(self, day: Day):
-#       self.daysList[day.day.day] = day #just maps the day (1-31) to that Day object
-
-#    def display(self):
-#       #display the month visually
-#       pass
-
-# class Year:
-#    def __init__(self, year):
-#       self.year = year
-#       self.monthsList = [None]
-#       for i in range(1, 13):
-#          temp = Month(i, year)
-#          self.monthsList.append(temp)
-
-#    def display(self):
-#       #display the year visually
-#       pass
-
-   
 
