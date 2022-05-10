@@ -30,6 +30,8 @@ for y in range(2022, 2026):
         yearDict[month] = monthDict
     calendar[y] = yearDict
 
+taskList = {}
+
 # days = {
 #    0:'Monday',
 #    1:'Tuesday',
@@ -48,12 +50,23 @@ repeat = {
 
 class Event:
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime,
-                event_name: str, description: str, recurring: int):
+                event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
       self.startDateTime = startDateTime
       self.endDateTime = endDateTime
       self.event_name = event_name
       self.description = description
       self.recurring = repeat[recurring]
+      self.isprivate = isPrivate
+      if startDateTime.date == endDateTime.date:
+         calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
+      else:
+         tdelta = datetime.timedelta(days = 1)
+         while True:
+            calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
+            if startDateTime.date == endDateTime.date:
+               break
+            startDateTime += tdelta
+            
 
    def setStartDatetime(self, datetime):
       self.startDateTime = datetime
@@ -70,9 +83,6 @@ class Event:
    def setDescription(self, description):
       self.description = description
 
-   
-
-
 class Course(Event):
 
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
@@ -83,11 +93,54 @@ class Meeting(Event):
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
        super().__init__(startDateTime, endDateTime, event_name, description, recurring)
 
-
 class Personal(Event):
 
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
       super().__init__(startDateTime, endDateTime, event_name, description, recurring)
+
+class Task:
+   
+   def __init__(self, name: str, description: str, dueDate: datetime.datetime, recurring: int = None):
+      self.name = name
+      self.description = description
+      self.dueDate = dueDate
+      self.recurring = recurring
+      if dueDate in taskList:
+         taskList[dueDate].append(self)
+      else:
+         taskList[dueDate] = [self]
+
+def displayTaskList():
+   times = list(taskList.keys())
+   times.sort()
+   for t in times:
+      for task in taskList[t]:
+         #display that task
+         pass
+
+
+def displayDay(day: datetime.datetime, showPrivate: bool = True):
+   eventList = calendar[day.year][day.month][day]
+   for event in eventList:
+      if showPrivate:
+         #display event in normal form
+         pass
+      else:
+         if event.isPrivate:
+            #display event in greyed out form
+            pass
+         else:
+            #display event normally
+            pass
+
+
+def showAvailibility(startDay: datetime.datetime, endDay: datetime.datetime, showPrivate: bool = False):
+   tdelta = datetime.timedelta(days = 1)
+   while True:
+      displayDay(startDay, showPrivate)
+      if startDay == endDay:
+         break
+      startDay += tdelta
 
 
 # class Day:
