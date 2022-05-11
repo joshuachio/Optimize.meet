@@ -91,6 +91,7 @@ class Meeting(Event):
 
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
       super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
+   #Doesn't course need to take in academic calendar or are we interpreting that seperately?
 
 class Personal(Event):
 
@@ -98,7 +99,7 @@ class Personal(Event):
       super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
 
 class Task:
-   
+   #Personally think description might have a right to be optional? Up to you here
    def __init__(self, name: str, description: str, dueDate: datetime.datetime, recurring: int = None):
       self.name = name
       self.description = description
@@ -108,7 +109,7 @@ class Task:
          taskList[dueDate].append(self)
       else:
          taskList[dueDate] = [self]
-
+#hot
 def displayTaskList():
    times = list(taskList.keys())
    times.sort()
@@ -116,6 +117,7 @@ def displayTaskList():
    for t in times:
       for task in taskList[t]:
          #display that task
+         #We can just return the taskList so it can get called by the frontend? 
          pass
 
 
