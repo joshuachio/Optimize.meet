@@ -5,30 +5,37 @@ import datetime
 
 calendar = {}
 
+#I can verify that this works but we should probably make calendar a class so we can give it methods?
 for y in range(2022, 2026):
     yearDict = {}
     for month in range(1, 13):
         monthDict = {}
+        #April, June, September, November have 30 Days
         if month == 4 or month == 6 or month == 9 or month == 11:
             monthDict = {}
             for d in range(1, 31):
                 date = datetime.datetime(y, month, d)
                 monthDict[date] = []
+                
+         #Feburary has 28 or 29 days
         elif month == 2:
             if y % 4 == 0:
                 for d in range(1, 30):
                     date = datetime.datetime(y, month, d)
                     monthDict[date] = []
+         #Not a leap year case
             else:
                 for d in range(1, 29):
                     date = datetime.datetime(y, month, d)
                     monthDict[date] = []
+        #All other months have 31 days
         else:
             for d in range(1, 32):
                 date = datetime.datetime(y, month, d)
                 monthDict[date] = []
         yearDict[month] = monthDict
     calendar[y] = yearDict
+
 
 taskList = {}
    
@@ -47,6 +54,7 @@ class Event:
       self.description = description
       self.recurring = repeat[recurring]
       self.isprivate = isPrivate
+      #NO idea what this case is...
       if startDateTime.date == endDateTime.date:
          calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
       else:
@@ -57,7 +65,7 @@ class Event:
                break
             startDateTime += tdelta
             
-
+   #obv methods
    def setStartDatetime(self, datetime):
       self.startDateTime = datetime
 
