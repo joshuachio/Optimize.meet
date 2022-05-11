@@ -84,18 +84,18 @@ class Event:
 
 class Course(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
-       super().__init__(startDateTime, endDateTime, event_name, description, recurring)
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
+      super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
 
 class Meeting(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
-       super().__init__(startDateTime, endDateTime, event_name, description, recurring)
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
+      super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
 
 class Personal(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str, recurring: int):
-      super().__init__(startDateTime, endDateTime, event_name, description, recurring)
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
+      super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
 
 class Task:
    
