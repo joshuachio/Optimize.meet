@@ -54,9 +54,10 @@ class Event:
       self.description = description
       self.recurring = repeat[recurring]
       self.isprivate = isPrivate
-      #NO idea what this case is...
+      #Adding event to calendar for when the event is on a single day
       if startDateTime.date == endDateTime.date:
          calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
+      #Adding event to calendar if the event is more than one day
       else:
          tdelta = datetime.timedelta(days = 1)
          while True:
@@ -111,6 +112,7 @@ class Task:
 def displayTaskList():
    times = list(taskList.keys())
    times.sort()
+   #displaying each task after they are sort chronologically 
    for t in times:
       for task in taskList[t]:
          #display that task
@@ -120,6 +122,7 @@ def displayTaskList():
 
 def displayDay(day: datetime.datetime, showPrivate: bool = True):
    eventList = calendar[day.year][day.month][day]
+   #goes through all the events for that day and displays it one by one
    for event in eventList:
       if showPrivate:
          #display event in normal form
@@ -135,6 +138,7 @@ def displayDay(day: datetime.datetime, showPrivate: bool = True):
 
 def showAvailibility(startDay: datetime.datetime, endDay: datetime.datetime, showPrivate: bool = False):
    tdelta = datetime.timedelta(days = 1)
+   #goes day by day to display all the events
    while True:
       displayDay(startDay, showPrivate)
       if startDay == endDay:
