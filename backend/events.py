@@ -15,17 +15,6 @@ class Event:
       self.description = description
       self.recurring = repeat[recurring]
       self.isprivate = isPrivate
-      #Adding event to calendar for when the event is on a single day
-      if startDateTime.date == endDateTime.date:
-         calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
-      #Adding event to calendar if the event is more than one day
-      else:
-         tdelta = datetime.timedelta(days = 1)
-         while True:
-            calendar[startDateTime.year][startDateTime.month][startDateTime].append(self)
-            if startDateTime.date == endDateTime.date:
-               break
-            startDateTime += tdelta
             
    #obv methods
    def setStartDatetime(self, datetime):

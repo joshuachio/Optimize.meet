@@ -2,6 +2,8 @@ import time
 # import numpy
 import calendar as cal
 import datetime
+from events import Event
+from tasks import Task
 
 class Calendar:
    def __init__(self):
@@ -72,5 +74,26 @@ class Calendar:
          if startDay == endDay:
             break
          startDay += tdelta
+
+   def addEvent(self, event: Event):
+      #Adding event to calendar for when the event is on a single day
+      if event.startDateTime.date == event.endDateTime.date:
+         self.calendar[event.startDateTime.year][event.startDateTime.month][event.startDateTime].append(event)
+      #Adding event to calendar if the event is more than one day
+      else:
+         tdelta = datetime.timedelta(days = 1)
+         tempStartDate = event.startDateTime
+         while True:
+            self.calendar[tempStartDate.year][tempStartDate.month][tempStartDate].append(event)
+            if tempStartDate.date == tempStartDate.date:
+               break
+            tempStartDate += tdelta
+
+   #adds task to the task dictionary 
+   def addTask(self, task: Task):
+      if task.dueDate in self.taskList:
+        self.taskList[task.dueDate].append(task)
+      else:
+        self.taskList[task.dueDate] = [task]
 
 

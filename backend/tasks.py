@@ -7,7 +7,3 @@ class Task:
       self.description = description
       self.dueDate = dueDate
       self.recurring = recurring
-      if dueDate in taskList:
-         taskList[dueDate].append(self)
-      else:
-         taskList[dueDate] = [self]
