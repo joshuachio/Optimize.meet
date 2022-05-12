@@ -9,7 +9,6 @@ class Calendar:
    def __init__(self):
       self.calendar = {}
       self.taskList = {}
-      #I can verify that this works but we should probably make calendar a class so we can give it methods?
       for y in range(2022, 2026):
          yearDict = {}
          for month in range(1, 13):
@@ -20,7 +19,6 @@ class Calendar:
                   for d in range(1, 31):
                      date = datetime.datetime(y, month, d)
                      monthDict[date] = []
-                     
                #Feburary has 28 or 29 days
             elif month == 2:
                   if y % 4 == 0:
@@ -44,7 +42,7 @@ class Calendar:
    def displayTaskList(self):
       times = list(self.taskList.keys())
       times.sort()
-      #displaying each task after they are sort chronologically 
+      #displaying each task after they are sorted chronologically 
       for t in times:
          for task in self.taskList[t]:
             #display that task
@@ -89,11 +87,29 @@ class Calendar:
                break
             tempStartDate += tdelta
 
+   def deleteEvent(self, event: Event):
+      #Same as adding event, but with remove() function
+      if event.startDateTime.date == event.endDateTime.date:
+         self.calendar[event.startDateTime.year][event.startDateTime.month][event.startDateTime].remove(event)
+      #Removing event to calendar if the event is more than one day
+      else:
+         tdelta = datetime.timedelta(days = 1)
+         tempStartDate = event.startDateTime
+         while True:
+            self.calendar[tempStartDate.year][tempStartDate.month][tempStartDate].remove(event)
+            if tempStartDate.date == tempStartDate.date:
+               break
+            tempStartDate += tdelta
+
    #adds task to the task dictionary 
    def addTask(self, task: Task):
       if task.dueDate in self.taskList:
         self.taskList[task.dueDate].append(task)
       else:
         self.taskList[task.dueDate] = [task]
+
+   def removeTask(self, task: Task):
+      if task.dueDate in self.taskList:
+        self.taskList[task.dueDate].remove(task)
 
 

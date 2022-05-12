@@ -16,4 +16,4 @@ class Bug(Task):
         self.collaboratorList = collaboratorList
 
     def addUser(self, userToAdd: User):
-        self.collaboratorList.append(userToAdd)
+        self.collaboratorList[userToAdd.userID] = userToAdd
