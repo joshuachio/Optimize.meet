@@ -1,5 +1,5 @@
 # Calendar App
 
-A calendar designed to send availability to other students or set up business meetings with the luxury of keeping private events private.
+A productivity solution conceptualized by one desperately in need of one. 
 
 Created by @joshuachio and @echavemann
