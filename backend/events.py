@@ -39,9 +39,10 @@ class Course(Event):
 
 class Meeting(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str,
+                description: str = None, recurring: int = None, isPrivate: bool = True, meetingLink: str = None):
       super().__init__(startDateTime, endDateTime, event_name, description, recurring, isPrivate)
-   #Doesn't course need to take in academic calendar or are we interpreting that seperately?
+      self.meetingLink = meetingLink
 
 class Personal(Event):
 

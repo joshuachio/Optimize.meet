@@ -1,0 +1,27 @@
+Calendar Road Map
+
+Events
+- Figure out how to implement recurring events
+- Subclasses
+    - Course
+        - Take in academic cal
+    - Meeting
+        - Maybe 1 collaborator
+        - Optional link that can be sent included
+    - Personal
+        - Not sure whwat other attributes this would have dif from normal Event
+
+Tasks
+- Normal tasks
+- Collaborative
+    - Use gantt chart to track
+    - Need more infra here
+
+Calendar
+- Display events based on availability (returns list of events)
+- Display tasks (return list of tasks)
+- Display a calendar (day, week, month)
+- Daily digest (include tasks, meetings, classes, etc)
+
+User
+- Each user has their own calendar
