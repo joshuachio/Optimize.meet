@@ -1,3 +1,5 @@
 env
 config.yaml
 test.py
+pycache
+DS_Store
