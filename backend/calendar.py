@@ -187,5 +187,3 @@ class Calendar:
          return events
       allTODO = events + tasks
       return allTODO
-
-
