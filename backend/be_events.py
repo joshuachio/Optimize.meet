@@ -1,5 +1,5 @@
 import datetime
-from recurring import Recurring
+from be_recurring import Recurring
 
 repeat = {
    1: datetime.timedelta(days=1),

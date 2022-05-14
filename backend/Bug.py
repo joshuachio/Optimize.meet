@@ -1,8 +1,10 @@
 import user
-import tasks
+import be_tasks
 import datetime
 
-class Bug(tasks.Task):
+#This doesn't compile
+
+class Bug(be_tasks.Task):
     #a collaborative task/project to work on
     def __init__(self, name: str, dueDate: datetime.datetime, collaboratorList, description: str = '', recurring: int = None):
         super().__init__(name, dueDate, description, recurring)
