@@ -2,7 +2,6 @@ import datetime
 from calendar import Calendar
 from pydoc import ispackage
 from events import Event
-from user import User
 from tasks import Task
 
 class User:
@@ -26,10 +25,10 @@ class User:
     def addTask(self, task: Task):
         self.calendar.addTask(task)
 
-    def addFriend(self, friend: User):
+    def addFriend(self, friend):
         self.friendsList[friend.userID] = friend
 
-    def removeFriend(self, friend: User):
+    def removeFriend(self, friend):
         del self.friendsList[friend.userID] 
 
     def showFriendList(self):
