@@ -3,3 +3,4 @@ config.yaml
 test.py
 pycache
 DS_Store
+pytest_cache
