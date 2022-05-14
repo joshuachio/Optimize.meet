@@ -7,7 +7,7 @@ from tasks import Task
 
 class Calendar:
    def __init__(self):
-      self.calendar = {}
+      self.myCal = {}
       self.taskList = {}
       for y in range(2022, 2026):
          yearDict = {}
@@ -36,7 +36,7 @@ class Calendar:
                      date = datetime.datetime(y, month, d)
                      monthDict[date] = []
             yearDict[month] = monthDict
-         self.calendar[y] = yearDict
+         self.myCal[y] = yearDict
 
    #hot
    def displayTaskList(self, day: datetime.datetime):
@@ -52,7 +52,7 @@ class Calendar:
       #       pass
 
    def displayDay(self, day: datetime.datetime, showPrivate: bool = True):
-      return self.calendar[day.year][day.month][day]
+      return self.myCal[day.year][day.month][day]
       # #goes through all the events for that day and displays it one by one
       # for event in eventList:
       #    if showPrivate:
@@ -70,7 +70,7 @@ class Calendar:
       tdelta = datetime.timedelta(days = 1)
       days = []
       while True:
-         days += self.calendar[startDay.year][startDay.month][startDay]
+         days += self.myCal[startDay.year][startDay.month][startDay]
          if startDay == endDay:
             break
          startDay += tdelta
@@ -80,13 +80,13 @@ class Calendar:
    def addEvent(self, event: Event):
       #Adding event to calendar for when the event is on a single day
       if event.startDateTime.date == event.endDateTime.date:
-         self.calendar[event.startDateTime.year][event.startDateTime.month][event.startDateTime].append(event)
+         self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].append(event)
       #Adding event to calendar if the event is more than one day
       else:
          tdelta = datetime.timedelta(days = 1)
          tempStartDate = event.startDateTime
          while True:
-            self.calendar[tempStartDate.year][tempStartDate.month][tempStartDate].append(event)
+            self.myCal[tempStartDate.year][tempStartDate.month][tempStartDate].append(event)
             if tempStartDate.date == tempStartDate.date:
                break
             tempStartDate += tdelta
@@ -94,13 +94,13 @@ class Calendar:
    def deleteEvent(self, event: Event):
       #Same as adding event, but with remove() function
       if event.startDateTime.date == event.endDateTime.date:
-         self.calendar[event.startDateTime.year][event.startDateTime.month][event.startDateTime].remove(event)
+         self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].remove(event)
       #Removing event to calendar if the event is more than one day
       else:
          tdelta = datetime.timedelta(days = 1)
          tempStartDate = event.startDateTime
          while True:
-            self.calendar[tempStartDate.year][tempStartDate.month][tempStartDate].remove(event)
+            self.myCal[tempStartDate.year][tempStartDate.month][tempStartDate].remove(event)
             if tempStartDate.date == tempStartDate.date:
                break
             tempStartDate += tdelta
@@ -118,7 +118,7 @@ class Calendar:
 
    def dailyDigest(self, showEvents = True, showTasks = True):
       today = datetime.datetime.today()
-      events = self.calendar[today.year][today.month][today]
+      events = self.myCal[today.year][today.month][today]
       tasks = self.taskList[today.date]
       if not showEvents:
          return tasks
