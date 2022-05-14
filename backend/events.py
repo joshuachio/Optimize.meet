@@ -1,4 +1,5 @@
 import datetime
+from recurring import Recurring
 
 repeat = {
    1: datetime.timedelta(days=1),
@@ -7,14 +8,13 @@ repeat = {
 
 class Event:
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime,
-                event_name: str, location, description: str = None, recurring: int = None, isPrivate: bool = True):
-      if startDateTime.date is endDateTime.date:
-         self.setStartDatetime(startDateTime)
-         self.setEndDatetime(endDateTime)
+                event_name: str, location, description: str = None, recurring: Recurring = None, isPrivate: bool = True):
+      self.setStartDatetime(startDateTime)
+      self.setEndDatetime(endDateTime)
       self.event_name = event_name
       self.location = location
       self.description = description
-      self.recurring = repeat[recurring]
+      self.recurring = recurring
       self.isprivate = isPrivate
             
    #obv methods
@@ -31,15 +31,16 @@ class Event:
       self.location = location
 
    def setRecurring(self, recurring):
-      self.recurring = repeat[recurring]
+      self.recurring = recurring
 
    def setDescription(self, description):
       self.description = description
 
 class Course(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location, description: str = None, recurring: int = None, isPrivate: bool = True):
-       super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location,
+                description: str = None, recurring: int = None, isPrivate: bool = True):
+      super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
 
 class Meeting(Event):
 
@@ -57,10 +58,6 @@ class Meeting(Event):
 
 class Personal(Event):
 
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location, description: str = None, recurring: int = None, isPrivate: bool = True):
-       super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
-
-class MultiDay(Event):
-
-   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location, description: str = None, recurring: int = None, isPrivate: bool = True):
-       super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
+   def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location,
+                description: str = None, recurring: int = None, isPrivate: bool = True):
+      super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
