@@ -6,6 +6,7 @@ Baseline Release (Target May 30) - Basic Features Done
 - Calendar and To-do list functionalities
 - Availability Sharing
 - Log-Ins
+- Firebase
 - In-Repo Testing
 - Academic Calendars
 - Daily Digest
