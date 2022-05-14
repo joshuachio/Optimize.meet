@@ -103,13 +103,24 @@ class Calendar:
 
    #adds task to the task dictionary 
    def addTask(self, task: Task):
-      if task.dueDate in self.taskList:
-        self.taskList[task.dueDate].append(task)
+      if task.dueDate.date in self.taskList:
+        self.taskList[task.dueDate.date].append(task)
       else:
-        self.taskList[task.dueDate] = [task]
+        self.taskList[task.dueDate.date] = [task]
 
    def removeTask(self, task: Task):
-      if task.dueDate in self.taskList:
-        self.taskList[task.dueDate].remove(task)
+      if task.dueDate.date in self.taskList:
+        self.taskList[task.dueDate.date].remove(task)
+
+   def dailyDigest(self, showEvents = True, showTasks = True):
+      today = datetime.datetime.today()
+      events = self.calendar[today.year][today.month][today]
+      tasks = self.taskList[today.date]
+      if not showEvents:
+         return tasks
+      elif not showTasks:
+         return events
+      allTODO = events + tasks
+      return allTODO
 
 

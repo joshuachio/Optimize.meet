@@ -36,4 +36,7 @@ class User:
             #display friend list
             pass
 
+    def showDailyDigest(self, showEvents = True, showTasks = True):
+        return self.calendar.dailyDigest(showEvents, showTasks)
+
 
