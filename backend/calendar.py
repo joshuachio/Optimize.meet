@@ -39,30 +39,32 @@ class Calendar:
          self.calendar[y] = yearDict
 
    #hot
-   def displayTaskList(self):
-      times = list(self.taskList.keys())
-      times.sort()
-      #displaying each task after they are sorted chronologically 
-      for t in times:
-         for task in self.taskList[t]:
-            #display that task
-            #We can just return the taskList so it can get called by the frontend? 
-            pass
+   def displayTaskList(self, day: datetime.datetime):
+      if day.date() in self.taskList:
+         return self.taskList[day.date()]
+      # times = list(self.taskList.keys())
+      # times.sort()
+      # #displaying each task after they are sorted chronologically 
+      # for t in times:
+      #    for task in self.taskList[t]:
+      #       #display that task
+      #       #We can just return the taskList so it can get called by the frontend? 
+      #       pass
 
    def displayDay(self, day: datetime.datetime, showPrivate: bool = True):
-      eventList = self.calendar[day.year][day.month][day]
-      #goes through all the events for that day and displays it one by one
-      for event in eventList:
-         if showPrivate:
-            #display event in normal form
-            pass
-         else:
-            if event.isPrivate:
-               #display event in greyed out form
-               pass
-            else:
-               #display event normally
-               pass
+      return self.calendar[day.year][day.month][day]
+      # #goes through all the events for that day and displays it one by one
+      # for event in eventList:
+      #    if showPrivate:
+      #       #display event in normal form
+      #       pass
+      #    else:
+      #       if event.isPrivate:
+      #          #display event in greyed out form
+      #          pass
+      #       else:
+      #          #display event normally
+      #          pass
 
    def showAvailibility(self, startDay: datetime.datetime, endDay: datetime.datetime, showPrivate: bool = False):
       tdelta = datetime.timedelta(days = 1)
