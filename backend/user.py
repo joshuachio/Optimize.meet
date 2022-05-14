@@ -36,6 +36,9 @@ class User:
             #display friend list
             pass
 
+    def showAvailability(self, startDatetime, endDatetime, showPrivate: bool = False):
+        return self.calendar.showAvailability(startDatetime, endDatetime, showPrivate)
+
     def showDailyDigest(self, showEvents = True, showTasks = True):
         return self.calendar.dailyDigest(showEvents, showTasks)
 

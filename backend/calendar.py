@@ -66,12 +66,14 @@ class Calendar:
 
    def showAvailibility(self, startDay: datetime.datetime, endDay: datetime.datetime, showPrivate: bool = False):
       tdelta = datetime.timedelta(days = 1)
-      #goes day by day to display all the events
+      days = []
       while True:
-         self.displayDay(startDay, showPrivate)
+         days += self.calendar[startDay.year][startDay.month][startDay]
          if startDay == endDay:
             break
          startDay += tdelta
+      #returns the a list of events during this time period, but does not display them
+      return days
 
    def addEvent(self, event: Event):
       #Adding event to calendar for when the event is on a single day
