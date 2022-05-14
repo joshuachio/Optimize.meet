@@ -6,7 +6,7 @@ import datetime
 
 def test_init():
     cal = calendar.Calendar()
-    assert (cal.taskList) == {}
+    #assert (cal.taskList) == {}
     assert cal.calendar != {}
     assert cal.calendar[2022] != {}
     assert cal.calendar[2022][1] != {}
