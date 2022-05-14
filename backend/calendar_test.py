@@ -1,11 +1,11 @@
-import cale
+import be_calendar
 import pytest
 import datetime
 
 
 
 def test_init():
-    cal = cale.Calendar()
+    cal = be_calendar.Calendar()
     assert (cal.taskList) == {}
     assert cal.myCal != {}
     assert cal.myCal[2022] != {}

@@ -2,8 +2,8 @@ import time
 # import numpy
 #import calendar as cal
 import datetime
-from events import Event
-from tasks import Task
+from be_events import Event
+from be_tasks import Task
 
 class Calendar:
    def __init__(self):
