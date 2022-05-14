@@ -1,5 +1,4 @@
 import datetime
-from user import User
 
 repeat = {
    1: datetime.timedelta(days=1),
@@ -24,12 +23,12 @@ class Task:
     def setDescription(self, text):
         self.description = text
 
-class Bug(Task):
-    #a collaborative task/project to work on
-    def __init__(self, name: str, dueDate: datetime.datetime, collaboratorList, description: str = '', recurring: int = None):
-        super().__init__(name, dueDate, description, recurring)
-        self.collaboratorList = collaboratorList
+# class Bug(Task):
+#     #a collaborative task/project to work on
+#     def __init__(self, name: str, dueDate: datetime.datetime, collaboratorList, description: str = '', recurring: int = None):
+#         super().__init__(name, dueDate, description, recurring)
+#         self.collaboratorList = collaboratorList
 
-    def addUser(self, userToAdd: User):
-        self.collaboratorList[userToAdd.userID] = userToAdd
+#     def addUser(self, userToAdd: User):
+#         self.collaboratorList[userToAdd.userID] = userToAdd
 
