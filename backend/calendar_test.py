@@ -1,15 +1,15 @@
-import calendar
+import cale
 import pytest
 import datetime
 
 
 
 def test_init():
-    cal = calendar.Calendar()
+    cal = cale.Calendar()
     assert (cal.taskList) == {}
-"""     assert cal.calendar != {}
-    assert cal.calendar[2022] != {}
-    assert cal.calendar[2022][1] != {}
-    assert cal.calendar[2022][1][datetime.datetime(2022,1,1)] == [] """
+    assert cal.myCal != {}
+    assert cal.myCal[2022] != {}
+    assert cal.myCal[2022][1] != {}
+    assert cal.myCal[2022][1][datetime.datetime(2022,1,1)] == []
 
 
