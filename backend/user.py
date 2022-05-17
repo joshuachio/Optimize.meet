@@ -3,8 +3,8 @@ from calendar import Calendar
 from pydoc import ispackage
 from re import U
 from tkinter import E
-from events import Event
-from tasks import Task
+from be_events import Event
+from be_tasks import Task
 
 class User:
     def __init__(self, userID, username: str, email: str, password: str, calendar: Calendar, phoneNumber = None):
