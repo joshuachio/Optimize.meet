@@ -4,6 +4,7 @@ import time
 import datetime
 from be_events import Event
 from be_tasks import Task
+from be_recurring import Recurring
 
 class Calendar:
    def __init__(self):
@@ -34,21 +35,100 @@ class Calendar:
             yearDict[month] = monthDict
          self.myCal[y] = yearDict
 
-   #hot
-   def displayTaskList(self, day: datetime.datetime):
-      if day.date() in self.taskList:
-         return self.taskList[day.date()]
-      # times = list(self.taskList.keys())
-      # times.sort()
-      # #displaying each task after they are sorted chronologically 
-      # for t in times:
-      #    for task in self.taskList[t]:
-      #       #display that task
-      #       #We can just return the taskList so it can get called by the frontend? 
-      #       pass
+   def addEvent(self, event: Event):
+      #Condition for if the event does not recurr
+      if event.recurring == None:
+         #Adding event to calendar for when the event is on a single day
+         if event.startDateTime.date is event.endDateTime.date:
+            self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime.day].append(event)
+         #Adding event to calendar if the event is more than one day
+         else:
+            tdelta = datetime.timedelta(days = 1)
+            tempDate = event.startDateTime
+            while tempDate < event.endDateTime:
+               self.myCal[tempDate.year][tempDate.month][tempDate.day].append(event)
+               tempDate += tdelta
+      #Condition for recurring events
+      else:
+         # self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime.day].append(event)
+         #Daily occurence, the interval represents how many days in between each occurence(one, two, etc days)
+         if event.recurring.freq == "DAILY":
+            tdelta = datetime.timedelta(days=1) * event.recurring.interval
+            tempDate = event.startDateTime
+            while tempDate < event.recurring.endDate:
+               self.myCal[tempDate.year][tempDate.month][tempDate.day].append(event)
+               tempDate += tdelta
+         #Weekly occurence, the interval represents how many days in between each occurence(one, two, etc weeks)
+         elif event.recurring.freq == "WEEKLY":
+            tdelta = datetime.timedelta(weeks=1) * event.recurring.interval
+            tempDate = event.startDateTime
+            #if there is no byDay and the event is just weekly
+            if not event.recurring.byDay:
+               while tempDate < event.recurring.endDate:
+                  self.myCal[tempDate.year][tempDate.month][tempDate.day].append(event)
+                  tempDate += tdelta
+            #byDay represents if the event happens weekly on a certain day of the week
+            else:
+               tday = datetime.timedelta(days=1)
+               #For each day in byDay, this will add the event to that day plus the weekly occurence
+               for i in event.recurring.byDay:
+                  while tempDate.isoweekday() != i:
+                     tempDate += tday
+                  while tempDate < event.recurring.endDate:
+                     self.myCal[tempDate.year][tempDate.month][tempDate.day].append(event)
+                     tempDate += tdelta
+                  tempDate = event.startDateTime
+
+   #Same method as addEvent, but with remove(event)
+   def deleteEvent(self, event: Event):
+      #Condition for if the event does not recurr
+      if event.recurring == None:
+         #Adding event to calendar for when the event is on a single day
+         if event.startDateTime.date == event.endDateTime.date:
+            self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime.day].remove(event)
+         #Adding event to calendar if the event is more than one day
+         else:
+            tdelta = datetime.timedelta(days = 1)
+            tempDate = event.startDateTime
+            while tempDate < event.endDateTime:
+               # if event in self.myCal[tempDate.year][tempDate.month][tempDate.day]:
+               self.myCal[tempDate.year][tempDate.month][tempDate.day].remove(event)
+               tempDate += tdelta
+      #Condition for recurring events
+      else:
+         # self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime.day].remove(event)
+         #Daily occurence, the interval represents how many days in between each occurence(one, two, etc days)
+         if event.recurring.freq == "DAILY":
+            tdelta = datetime.timedelta(days=1) * event.recurring.interval
+            tempDate = event.startDateTime
+            while tempDate < event.recurring.endDate:
+               print(1)
+               self.myCal[tempDate.year][tempDate.month][tempDate.day].remove(event)
+               tempDate += tdelta
+         #Weekly occurence, the interval represents how many days in between each occurence(one, two, etc weeks)
+         elif event.recurring.freq == "WEEKLY":
+            tdelta = datetime.timedelta(weeks=1) * event.recurring.interval
+            tempDate = event.startDateTime
+            #if there is no byDay and the event is just weekly
+            if not event.recurring.byDay:
+               while tempDate < event.recurring.endDate:
+                  self.myCal[tempDate.year][tempDate.month][tempDate.day].remove(event)
+                  tempDate += tdelta
+            #byDay represents if the event happens weekly on a certain day of the week
+            else:
+               tday = datetime.timedelta(days=1)
+               #For each day in byDay, this will add the event to that day plus the weekly occurence
+               for i in event.recurring.byDay:
+                  while tempDate.isoweekday() != i:
+                     tempDate += tday
+                  while tempDate < event.recurring.endDate:
+                     self.myCal[tempDate.year][tempDate.month][tempDate.day].remove(event)
+                     tempDate += tdelta
+                  tempDate = event.startDateTime
+
 
    def displayDay(self, day: datetime.datetime, showPrivate: bool = True):
-      return self.myCal[day.year][day.month][day]
+      return self.myCal[day.year][day.month][day.day]
       # #goes through all the events for that day and displays it one by one
       # for event in eventList:
       #    if showPrivate:
@@ -66,101 +146,12 @@ class Calendar:
       tdelta = datetime.timedelta(days = 1)
       days = []
       while True:
-         days += self.myCal[startDay.year][startDay.month][startDay]
+         days += self.myCal[startDay.year][startDay.month][startDay.day]
          if startDay == endDay:
             break
          startDay += tdelta
       #returns the a list of events during this time period, but does not display them
       return days
-
-   def addEvent(self, event: Event):
-      #Condition for if the event does not recurr
-      if event.recurring == None:
-         #Adding event to calendar for when the event is on a single day
-         if event.startDateTime.date == event.endDateTime.date:
-            self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].append(event)
-         #Adding event to calendar if the event is more than one day
-         else:
-            tdelta = datetime.timedelta(days = 1)
-            tempDate = event.startDateTime
-            while tempDate.date != event.endDateTime.date:
-               self.myCal[tempDate.year][tempDate.month][tempDate].append(event)
-               tempDate += tdelta
-      #Condition for recurring events
-      else:
-         self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].append(event)
-         #Daily occurence, the interval represents how many days in between each occurence(one, two, etc days)
-         if event.recurring.freq == "DAILY":
-            tdelta = datetime.timedelta(days=1) * event.recurring.interval
-            tempDate = event.startDateTime
-            while tempDate.date != event.recurring.endDate.date:
-               self.myCal[tempDate.year][tempDate.month][tempDate].append(event)
-               tempDate += tdelta
-         #Weekly occurence, the interval represents how many days in between each occurence(one, two, etc weeks)
-         elif event.recurring.freq == "WEEKLY":
-            tdelta = datetime.timedelta(weeks=1) * event.recurring.interval
-            tempDate = event.startDateTime
-            #if there is no byDay and the event is just weekly
-            if not event.recurring.byDay:
-               while tempDate.date != event.recurring.endDate.date:
-                  self.myCal[tempDate.year][tempDate.month][tempDate].append(event)
-                  tempDate += tdelta
-            #byDay represents if the event happens weekly on a certain day of the week
-            else:
-               tday = datetime.timedelta(days=1)
-               #For each day in byDay, this will add the event to that day plus the weekly occurence
-               for i in event.recurring.byDay:
-                  while tempDate.isoweekday() != i:
-                     tempDate += tday
-                  while tempDate.date < event.recurring.endDate.date:
-                     self.myCal[tempDate.year][tempDate.month][tempDate].append(event)
-                     tempDate += tdelta
-                  tempDate = event.startDateTime
-
-   #Same method as addEvent, but with remove(event)
-   def deleteEvent(self, event: Event):
-      #Condition for if the event does not recurr
-      if event.recurring == None:
-         #Adding event to calendar for when the event is on a single day
-         if event.startDateTime.date == event.endDateTime.date:
-            self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].remove(event)
-         #Adding event to calendar if the event is more than one day
-         else:
-            tdelta = datetime.timedelta(days = 1)
-            tempDate = event.startDateTime
-            while tempDate.date != event.endDateTime.date:
-               self.myCal[tempDate.year][tempDate.month][tempDate].remove(event)
-               tempDate += tdelta
-      #Condition for recurring events
-      else:
-         self.myCal[event.startDateTime.year][event.startDateTime.month][event.startDateTime].remove(event)
-         #Daily occurence, the interval represents how many days in between each occurence(one, two, etc days)
-         if event.recurring.freq == "DAILY":
-            tdelta = datetime.timedelta(days=1) * event.recurring.interval
-            tempDate = event.startDateTime
-            while tempDate.date != event.recurring.endDate.date:
-               self.myCal[tempDate.year][tempDate.month][tempDate].remove(event)
-               tempDate += tdelta
-         #Weekly occurence, the interval represents how many days in between each occurence(one, two, etc weeks)
-         elif event.recurring.freq == "WEEKLY":
-            tdelta = datetime.timedelta(weeks=1) * event.recurring.interval
-            tempDate = event.startDateTime
-            #if there is no byDay and the event is just weekly
-            if not event.recurring.byDay:
-               while tempDate.date != event.recurring.endDate.date:
-                  self.myCal[tempDate.year][tempDate.month][tempDate].remove(event)
-                  tempDate += tdelta
-            #byDay represents if the event happens weekly on a certain day of the week
-            else:
-               tday = datetime.timedelta(days=1)
-               #For each day in byDay, this will add the event to that day plus the weekly occurence
-               for i in event.recurring.byDay:
-                  while tempDate.isoweekday() != i:
-                     tempDate += tday
-                  while tempDate.date < event.recurring.endDate.date:
-                     self.myCal[tempDate.year][tempDate.month][tempDate].remove(event)
-                     tempDate += tdelta
-                  tempDate = event.startDateTime
 
    #adds task to the task dictionary 
    def addTask(self, task: Task):
@@ -173,34 +164,42 @@ class Calendar:
       if task.dueDate.date in self.taskList:
         self.taskList[task.dueDate.date].remove(task)
 
-<<<<<<< HEAD
+
+   #display the list of tasks for that day
+   def displayTaskList(self, day: datetime.datetime):
+      if day.date() in self.taskList:
+         return self.taskList[day.date()]
+      # times = list(self.taskList.keys())
+      # times.sort()
+      # #displaying each task after they are sorted chronologically 
+      # for t in times:
+      #    for task in self.taskList[t]:
+      #       #display that task
+      #       #We can just return the taskList so it can get called by the frontend? 
+      #       pass
+
    def dailyDigest(self, showEvents = True, showTasks = True):
-      today = datetime.datetime.today().year
-      events = self.myCal[today.year][today.month][today]
-      tasks = self.taskList[today.date]
-      if not showEvents:
+      today = datetime.date(datetime.date.today().year, datetime.date.today().month, datetime.date.today().day)
+      if not self.taskList:
+         tasks = []
+      else:
+         tasks = self.taskList[datetime.date.today()]
+      events = self.myCal[today.year][today.month][today.day]
+      if not showEvents or not self.taskList:
          return tasks
-      elif not showTasks:
+      elif not showTasks or not self.taskList:
          return events
       allTODO = events + tasks
       return allTODO
-=======
-#    def dailyDigest(self, showEvents = True, showTasks = True):
-#       today = datetime.datetime.today()
-#       helper = twoday = datetime.datetime(today.year, today.month, today.day,0,0)
-#       events = self.myCal[today.year][today.month][helper]
-#       tasks = self.displayTaskList(datetime.datetime(today.year, today.month, today.day))
-#       if not showEvents:
-#          return tasks
-#       elif not showTasks:
-#          return events
-#       allTODO = events + tasks
-#       return allTODO
-   
-# cal = Calendar()
-# today = datetime.datetime.today()
-# twoday = datetime.datetime(today.year, today.month, today.day,0,0)
-# print (cal.myCal[today.year][today.month][twoday])
-# #print (cal.myCal[today.year][today.month][datetime.datetime(today.year, today.month, today.day,0,0)])
-# print(cal.dailyDigest())
->>>>>>> 0bfd92e0a5afd90c9d7d4bc2385ca7d3f319c421
+
+cal = Calendar()
+secondTime = datetime.datetime(2022,1, 2, 13)
+tTime = datetime.datetime(2022,1, 2, 15)
+recurrance = Recurring("DAILY", 2, datetime.datetime(2022, 2, 1))
+secEvent = Event(secondTime, tTime, "Nap Time", "My bed", "Sleeping", recurrance)
+cal.addEvent(secEvent)
+print(cal.myCal[2022][1][10])
+print(cal.myCal[2022][1][2])
+cal.deleteEvent(secEvent) == None
+cal.myCal[2022][1][8] == []
+print(cal.myCal[2022][1][2])

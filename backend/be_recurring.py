@@ -29,7 +29,8 @@ class Recurring:
     #Checks that the int is a valid day according to the byDay dict
     def setByDay(self, byDay):
         self.byDay = []
-        for i in byDay:
-            if 0 < i < 8:
-                self.byDay.append(i)
+        if byDay != None:
+            for i in byDay:
+                if 0 < i < 8:
+                    self.byDay.append(i)
 
