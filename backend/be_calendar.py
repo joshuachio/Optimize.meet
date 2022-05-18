@@ -178,7 +178,7 @@ class Calendar:
         self.taskList[task.dueDate.date].remove(task)
 
    def dailyDigest(self, showEvents = True, showTasks = True):
-      today = datetime.datetime.today()
+      today = datetime.datetime.today().year
       events = self.myCal[today.year][today.month][today]
       tasks = self.taskList[today.date]
       if not showEvents:
