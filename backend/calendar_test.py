@@ -8,6 +8,7 @@ from be_tasks import Task
 
 
 def test_init():
+    #Ensures that INIT functions properly.
     cal = be_calendar.Calendar()
     assert cal.taskList == {}
     assert cal.myCal != {}
@@ -16,10 +17,10 @@ def test_init():
     assert cal.myCal[2022][1] != {}
     assert cal.myCal[2022][1][1] == []
 
-
+    #Ensures that an event can be added properly. 
     firstTime = datetime.datetime(2022,1, 1, 9)
     sTime = datetime.datetime(2022,1, 1, 11)
-    testEvent = Event(firstTime, sTime, "First Event", "1234 Road", "Video Call")
+    testEvent = Event(firstTime, sTime, "First Event", "1927 Orrington Avenue", "Video Call")
     assert cal.addEvent(testEvent) == None
     assert cal.myCal[2022][1][1][0] == testEvent
     assert cal.myCal[2022][1][1][0].description == "Video Call"
