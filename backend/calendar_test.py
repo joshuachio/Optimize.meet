@@ -34,7 +34,19 @@ def test_init():
     assert cal.myCal[2022][1][8][0] == secEvent
     assert cal.myCal[2022][1][2][0] == secEvent
     assert cal.myCal[2022][1][30][0] == secEvent
-    assert cal.showAvailibility(firstTime, datetime.datetime(2022,1, 15))
+
+    thirdTime = datetime.datetime(2022, 3, 2, 13)
+    thTime = datetime.datetime(2022, 3, 2, 15)
+    recurrance2 = Recurring("WEEKLY", 1, datetime.datetime(2022, 4, 2), [1, 3, 4])
+    thirdEvent = Event(thirdTime, thTime, "Sleep", "My bed", "Napping", recurrance2)
+    assert cal.addEvent(thirdEvent) == None
+    assert cal.myCal[2022][3][2][0] == thirdEvent
+    assert cal.myCal[2022][3][3][0] == thirdEvent
+    assert cal.myCal[2022][3][14][0] == thirdEvent
+    assert cal.myCal[2022][3][16][0] == thirdEvent
+    assert cal.myCal[2022][3][24][0] == thirdEvent
+    assert cal.myCal[2022][3][25] == []
+    assert cal.myCal[2022][4][2] == []
 
     assert cal.displayTaskList(datetime.datetime(2022,1,1)) == []
     due = datetime.datetime(2022, 1, 2)
