@@ -17,24 +17,20 @@ class Calendar:
             if month == 4 or month == 6 or month == 9 or month == 11:
                   monthDict = {}
                   for d in range(1, 31):
-                     date = datetime.datetime(y, month, d)
-                     monthDict[date] = []
+                     monthDict[d] = []
                #Feburary has 28 or 29 days
             elif month == 2:
                   if y % 4 == 0:
                      for d in range(1, 30):
-                        date = datetime.datetime(y, month, d)
-                        monthDict[date] = []
+                        monthDict[d] = []
                #Not a leap year case
                   else:
                      for d in range(1, 29):
-                        date = datetime.datetime(y, month, d)
-                        monthDict[date] = []
+                        monthDict[d] = []
             #All other months have 31 days
             else:
                   for d in range(1, 32):
-                     date = datetime.datetime(y, month, d)
-                     monthDict[date] = []
+                     monthDict[d] = []
             yearDict[month] = monthDict
          self.myCal[y] = yearDict
 
@@ -177,13 +173,21 @@ class Calendar:
       if task.dueDate.date in self.taskList:
         self.taskList[task.dueDate.date].remove(task)
 
-   def dailyDigest(self, showEvents = True, showTasks = True):
-      today = datetime.datetime.today()
-      events = self.myCal[today.year][today.month][today]
-      tasks = self.taskList[today.date]
-      if not showEvents:
-         return tasks
-      elif not showTasks:
-         return events
-      allTODO = events + tasks
-      return allTODO
+#    def dailyDigest(self, showEvents = True, showTasks = True):
+#       today = datetime.datetime.today()
+#       helper = twoday = datetime.datetime(today.year, today.month, today.day,0,0)
+#       events = self.myCal[today.year][today.month][helper]
+#       tasks = self.displayTaskList(datetime.datetime(today.year, today.month, today.day))
+#       if not showEvents:
+#          return tasks
+#       elif not showTasks:
+#          return events
+#       allTODO = events + tasks
+#       return allTODO
+   
+# cal = Calendar()
+# today = datetime.datetime.today()
+# twoday = datetime.datetime(today.year, today.month, today.day,0,0)
+# print (cal.myCal[today.year][today.month][twoday])
+# #print (cal.myCal[today.year][today.month][datetime.datetime(today.year, today.month, today.day,0,0)])
+# print(cal.dailyDigest())
