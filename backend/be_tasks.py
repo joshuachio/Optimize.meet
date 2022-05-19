@@ -1,7 +1,6 @@
 import datetime
 
 class Task:
-   #Personally think description might have a right to be optional? Up to you here
     def __init__(self, name: str, dueDate: datetime.datetime, description: str = ''):
         self.name = name
         self.description = description

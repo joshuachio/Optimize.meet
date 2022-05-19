@@ -10,30 +10,65 @@ class Calendar:
    def __init__(self):
       self.myCal = {}
       self.taskList = {}
-      for y in range(2022, 2026):
+      yearr = datetime.datetime.today().year
+      for y in range(yearr, yearr+5):
          yearDict = {}
          for month in range(1, 13):
             monthDict = {}
             #April, June, September, November have 30 Days
             if month == 4 or month == 6 or month == 9 or month == 11:
                   monthDict = {}
-                  for d in range(1, 31):
-                     monthDict[d] = []
+                  for d in range(30):
+                     monthDict[d+1] = []
                #Feburary has 28 or 29 days
             elif month == 2:
                   if y % 4 == 0:
-                     for d in range(1, 30):
-                        monthDict[d] = []
+                     for d in range(29):
+                        monthDict[d+1] = []
                #Not a leap year case
                   else:
-                     for d in range(1, 29):
-                        monthDict[d] = []
+                     for d in range(28):
+                        monthDict[d+1] = []
             #All other months have 31 days
             else:
-                  for d in range(1, 32):
-                     monthDict[d] = []
+                  for d in range(31):
+                     monthDict[d+1] = []
             yearDict[month] = monthDict
          self.myCal[y] = yearDict
+
+   def update(self, date: datetime.datetime = datetime.datetime.today()):
+      #Called on everything, pretty much ensures there is a 5 year horizon on anything we enter just to validate. 
+      curyear = date.year
+      if curyear in self.myCal.keys():
+         return 
+      else:
+         furthestyear = max(self.myCal.keys())
+         for y in range(furthestyear+1, curyear+5):
+            yearDict = {}
+            for month in range(1, 13):
+               monthDict = {}
+               #April, June, September, November have 30 Days
+               if month == 4 or month == 6 or month == 9 or month == 11:
+                  monthDict = {}
+                  for d in range(30):
+                     monthDict[d+1] = []
+               #Feburary has 28 or 29 days
+               elif month == 2:
+                  if y % 4 == 0:
+                     for d in range(29):
+                        monthDict[d+1] = []
+               #Not a leap year case
+                  else:
+                     for d in range(28):
+                        monthDict[d+1] = []
+               #All other months have 31 days
+               else:
+                  for d in range(31):
+                     monthDict[d+1] = []
+               yearDict[month] = monthDict
+            self.myCal[y] = yearDict
+      pass
+
 
    def addEvent(self, event: Event):
       #Condition for if the event does not recurr
@@ -189,3 +224,4 @@ class Calendar:
          return events
       allTODO = events + tasks
       return allTODO
+
