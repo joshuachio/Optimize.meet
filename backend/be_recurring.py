@@ -1,6 +1,4 @@
 import datetime
-import jsonpickle
-import pickle
 
 byDay = {
     7: "SUNDAY",

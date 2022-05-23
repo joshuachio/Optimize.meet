@@ -1,5 +1,4 @@
 import datetime
-import json
 from be_recurring import Recurring
 
 repeat = {
