@@ -35,14 +35,3 @@ class Recurring:
             for i in byDay:
                 if 0 < i < 8:
                     self.byDay.append(i)
-
-Recurrance = Recurring("WEEKLY", 5, datetime.datetime(2022, 2, 1), [1, 2, 4])
-# f = jsonpickle.encode(Recurrance)
-# print(f)
-# e = jsonpickle.decode(f)
-# print(e.endDate)
-p = pickle.dumps(Recurrance)
-print(p)
-q = pickle.loads(p)
-print(q)
-# print(json.dumps(str(Recurrance)))

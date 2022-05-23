@@ -62,9 +62,3 @@ class Personal(Event):
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime, event_name: str, location,
                 description: str = None, recurring: int = None, isPrivate: bool = True):
       super().__init__(startDateTime, endDateTime, event_name, location, description, recurring, isPrivate)
-
-
-testStartDate = datetime.datetime(2022, 1, 1, 19, 0) #9 am Jan 1st, 2022
-testEndDate = datetime.datetime(2022, 1, 1, 11, 0) #11 am Jan 1st, 2022
-event = Event(testStartDate, testEndDate, "call Ethan", "1234 Road", "Discuss calendar project")
-# print(json.dumps(event))
