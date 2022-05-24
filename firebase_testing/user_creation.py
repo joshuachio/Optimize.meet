@@ -1,12 +1,10 @@
 import datetime
 import jsonpickle
-import json
 from collections import OrderedDict
 from Pyrebase4 import pyrebase
 from be_calendar import Calendar
 from be_events import Event
 from be_tasks import Task
-from be_recurring import Recurring
 from config_key import config_values
 
 class User:
