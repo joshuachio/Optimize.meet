@@ -24,6 +24,7 @@ class User:
         firebase = pyrebase.initialize_app(config)
         auth = firebase.auth()
         db = firebase.database()
+        storage = firebase.storage()
         userInstance = auth.create_user_with_email_and_password(email, password)
 
         #User Class Attributes
@@ -35,11 +36,15 @@ class User:
         self.phoneNumber = phoneNumber
         self.friendsList = {}
 
-        #Adds the user to firebase realtime database
+        #Adds the user to firebase storage
         encodedUser = jsonpickle.encode(self)
-        dictOfUser = json.loads(encodedUser)
-        modifiedDictOfUser = OrderedDict(self.modify_dict(dictOfUser))
-        db.child("users").child(self.userID).set(modifiedDictOfUser)
+        openFile = open('upload.txt', 'w')
+        print(encodedUser, file=openFile)
+        openFile.close()
+        storage.child("users/" + self.userID + ".txt").put('upload.txt')
+        # dictOfUser = json.loads(encodedUser)
+        # modifiedDictOfUser = OrderedDict(self.modify_dict(dictOfUser))
+        # db.child("users").child(self.userID).set(modifiedDictOfUser)
 
     #Check for valid username (MUST BE 8-30 characters long, only alphanumeric characters)
     def setUsername(self, username):
@@ -112,7 +117,7 @@ class User:
         return self.calendar.dailyDigest(showEvents, showTasks)
 
     def modify_dict(self, d):
-        new = {}
+        new = OrderedDict()
         for k, v in d.items():
             if type(v) == dict:
                 v = self.modify_dict(v)
@@ -121,22 +126,90 @@ class User:
                     if type(v[i]) == dict:
                         v[i] = self.modify_dict(v[i])
             if "/" in k:
-                temp = k.replace("/", "X")
+                temp = k.replace("/", "XX")
                 new[temp] = v
             else:
                 new[k] = v
-        return new
+        return OrderedDict(new)
 
-# class Session:
-#     def __init__(self, user: User):
-#
-#         self.
-#
-#     def createUser(self, user: User):
-#
-#
+    def unmodify_dict(self, d):
+        new = {}
+        for k, v in d.items():
+            if type(v) == dict:
+                v = self.unmodify_dict(v)
+            elif type(v) == list:
+                for i in range(len(v)):
+                    if type(v[i]) == dict:
+                        v[i] = self.unmodify_dict(v[i])
+            if "XX" in k:
+                temp = k.replace("XX", "/")
+                new[temp] = v
+            else:
+                new[k] = v
+        return OrderedDict(new)
+
+class Session:
+    def __init__(self, email, password):
+        config = {
+            "apiKey": "AIzaSyAz5bLpUWAOBouA8Q9_WeloGYDdI1Q9s5g",
+            "authDomain": "calendar-be058.firebaseapp.com",
+            "databaseURL": "https://calendar-be058-default-rtdb.firebaseio.com",
+            "projectId": "calendar-be058",
+            "storageBucket": "calendar-be058.appspot.com",
+            "messagingSenderId": "765432044481",
+            "appId": "1:765432044481:web:7dceaf5af57e8374572d40",
+            "measurementId": "G-9Q457P91BV"
+        }
+        firebase = pyrebase.initialize_app(config)
+        auth = firebase.auth()
+        db = firebase.database()
+        storage = firebase.storage()
+        userInstance = auth.sign_in_with_email_and_password(email, password)
+        userID = userInstance['localID']
+        storage.child("users/" + userID + ".txt").download('download.txt', 'download.txt')
+        openFile = open('download.txt', 'r')
+        self.user = jsonpickle.decode(openFile.read())
+        openFile.close()
+
+    def createUser(self, user: User):
+        pass
 
 
+config = {
+            "apiKey": "AIzaSyAz5bLpUWAOBouA8Q9_WeloGYDdI1Q9s5g",
+            "authDomain": "calendar-be058.firebaseapp.com",
+            "databaseURL": "https://calendar-be058-default-rtdb.firebaseio.com",
+            "projectId": "calendar-be058",
+            "storageBucket": "calendar-be058.appspot.com",
+            "messagingSenderId": "765432044481",
+            "appId": "1:765432044481:web:7dceaf5af57e8374572d40",
+            "measurementId": "G-9Q457P91BV"
+        }
+firebase = pyrebase.initialize_app(config)
+# auth = firebase.auth()
+# db = firebase.database()
+# userInstance = auth.sign_in_with_email_and_password("joshuachio10@gmail.com", "JoshuaChio1020")
+# userID = userInstance['localId']
+# user = db.child("users").child(userID).get().val()
+#
+# def unmodify_dict(d):
+#     new = {}
+#     for k, v in d.items():
+#         if type(v) == dict:
+#             v = unmodify_dict(v)
+#         elif type(v) == list:
+#             for i in range(len(v)):
+#                 if type(v[i]) == dict:
+#                     v[i] = unmodify_dict(v[i])
+#         if "XX" in k:
+#             temp = k.replace("XX", "/")
+#             new[temp] = v
+#         else:
+#             new[k] = v
+#     return new
+#
+# print(unmodify_dict(user))
+# print(jsonpickle.decode(str(user)))
 
 
 
