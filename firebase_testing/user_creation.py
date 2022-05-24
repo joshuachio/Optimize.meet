@@ -7,20 +7,12 @@ from be_calendar import Calendar
 from be_events import Event
 from be_tasks import Task
 from be_recurring import Recurring
+from config_key import config_values
 
 class User:
     def __init__(self, username: str, email: str, password: str, calendar: Calendar, phoneNumber = None):
         #This will create a user in the admin dashboard on firebase (ALSO checks for valid email)
-        config = {
-            "apiKey": "AIzaSyAz5bLpUWAOBouA8Q9_WeloGYDdI1Q9s5g",
-            "authDomain": "calendar-be058.firebaseapp.com",
-            "databaseURL": "https://calendar-be058-default-rtdb.firebaseio.com",
-            "projectId": "calendar-be058",
-            "storageBucket": "calendar-be058.appspot.com",
-            "messagingSenderId": "765432044481",
-            "appId": "1:765432044481:web:7dceaf5af57e8374572d40",
-            "measurementId": "G-9Q457P91BV"
-        }
+        config = config_values
         firebase = pyrebase.initialize_app(config)
         auth = firebase.auth()
         db = firebase.database()

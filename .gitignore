@@ -5,3 +5,4 @@ pycache
 DS_Store
 pytest_cache
 Pyrebase4
+firebase_testing/config_key.py
