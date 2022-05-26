@@ -36,7 +36,7 @@ class User:
             self.username = None
             return
         for char in username:
-            if not (48 <= ord(char) <= 57) or not (65 <= ord(char) <= 90) or not (97 <= ord(char) <= 122):
+            if not char.isalum():
                 self.username = None
                 return
         self.username = username
@@ -47,16 +47,13 @@ class User:
             self.password = None
             return
         for char in password:
-            if not (48 <= ord(char) <= 57) or not (65 <= ord(char) <= 90) or not (97 <= ord(char) <= 122):
+            if not char.isalnum():
                 self.password = None
                 return
         self.password = password
 
     # Check for valid phone number
     def setPhoneNumber(self, number):
-        if number.isdigit():
-            self.phoneNumber = number
-            return
         count = 0
         if "+" in number:
             for char in number:
@@ -85,45 +82,45 @@ class User:
         # modifiedDictOfUser = OrderedDict(self.modify_dict(dictOfUser))
         # db.child("users").child(self.userID).set(modifiedDictOfUser)
 
-    def modify_dict(self, d):
-        new = OrderedDict()
-        for k, v in d.items():
-            if type(v) == dict:
-                v = self.modify_dict(v)
-            elif type(v) == list:
-                for i in range(len(v)):
-                    if type(v[i]) == dict:
-                        v[i] = self.modify_dict(v[i])
-            if "/" in k:
-                temp = k.replace("/", "XX")
-                new[temp] = v
-            else:
-                new[k] = v
-        return OrderedDict(new)
-
-    def unmodify_dict(self, d):
-        new = {}
-        for k, v in d.items():
-            if type(v) == dict:
-                v = self.unmodify_dict(v)
-            elif type(v) == list:
-                for i in range(len(v)):
-                    if type(v[i]) == dict:
-                        v[i] = self.unmodify_dict(v[i])
-            if "XX" in k:
-                temp = k.replace("XX", "/")
-                new[temp] = v
-            else:
-                new[k] = v
-        return OrderedDict(new)
+    # def modify_dict(self, d):
+    #     new = OrderedDict()
+    #     for k, v in d.items():
+    #         if type(v) == dict:
+    #             v = self.modify_dict(v)
+    #         elif type(v) == list:
+    #             for i in range(len(v)):
+    #                 if type(v[i]) == dict:
+    #                     v[i] = self.modify_dict(v[i])
+    #         if "/" in k:
+    #             temp = k.replace("/", "XX")
+    #             new[temp] = v
+    #         else:
+    #             new[k] = v
+    #     return OrderedDict(new)
+    #
+    # def unmodify_dict(self, d):
+    #     new = {}
+    #     for k, v in d.items():
+    #         if type(v) == dict:
+    #             v = self.unmodify_dict(v)
+    #         elif type(v) == list:
+    #             for i in range(len(v)):
+    #                 if type(v[i]) == dict:
+    #                     v[i] = self.unmodify_dict(v[i])
+    #         if "XX" in k:
+    #             temp = k.replace("XX", "/")
+    #             new[temp] = v
+    #         else:
+    #             new[k] = v
+    #     return OrderedDict(new)
 
 
 class Session:
     def __init__(self, email, password):
+        # Log in for the user using email and password
         config = config_values
         firebase = pyrebase.initialize_app(config)
         auth = firebase.auth()
-        db = firebase.database()
         storage = firebase.storage()
         userInstance = auth.sign_in_with_email_and_password(email, password)
         userID = userInstance['localId']
@@ -131,6 +128,8 @@ class Session:
         openFile = open('download.bin', 'rb')
         self.user = pickle.loads(openFile.read())
         openFile.close()
+
+        # self.user is the User instance corresponding to the login info
 
     def createEvent(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime,
                     event_name: str, description: str = None, recurring: int = None, isPrivate: bool = True):
@@ -160,11 +159,12 @@ class Session:
     def showDailyDigest(self, showEvents=True, showTasks=True):
         return self.calendar.dailyDigest(showEvents, showTasks)
 
+    # This will reformat the User file in storage with updated data
     def logOut(self):
         self.user.addToStorage()
 
 
-#messy testing stuff disregard
+# messy testing stuff disregard
 
 cal = Calendar()
 cal.taskList == {}
@@ -178,6 +178,7 @@ cal.myCal[2022][1][1] == []
 firstTime = datetime.datetime(2022, 1, 1, 9)
 sTime = datetime.datetime(2022, 1, 1, 11)
 testEvent = Event(firstTime, sTime, "First Event", "1927 Orrington Avenue", "Video Call")
+testEvente = Event(firstTime, sTime, "First Even", "1927 Orrington Avenue", "Video Call")
 cal.addEvent(testEvent)
 cal.myCal[2022][1][1][0] == testEvent
 cal.myCal[2022][1][1][0].description == "Video Call"
@@ -200,4 +201,14 @@ password = "JoshuaChio1020"
 # u = User("Joshua Chio", email, password, cal, 9725911128)
 # u.addToStorage()
 f = Session('joshuachio10@gmail.com', 'JoshuaChio1020')
-print(f.user.calendar.showAvailibility(firstTime, datetime.datetime(2022, 1, 20)))
+print(f.user.username)
+f.user.setUsername("changed")
+f.user.calendar.addEvent(testEvente)
+events = f.user.calendar.showAvailibility(firstTime, datetime.datetime(2022, 1, 20))
+for e in events:
+    print(e.event_name)
+print()
+f.logOut()
+
+# g = Session('joshuachio10@gmail.com', 'JoshuaChio1020')
+# print(g.user.username)
