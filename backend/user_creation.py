@@ -4,6 +4,7 @@ import pickle
 import jsonpickle
 from collections import OrderedDict
 from pyrebase import pyrebase
+from Pyrebase4 import pyrebase
 from be_calendar import Calendar
 from be_events import Event
 from be_tasks import Task
@@ -29,8 +30,8 @@ class User:
         self.storage = firebase.storage()
 
         # This will create a user in the admin dashboard on firebase (ALSO checks for valid email)
-        userInstance = self.auth.create_user_with_email_and_password(email, password)
-        self.userID = userInstance["localId"]
+        self.userInstance = self.auth.create_user_with_email_and_password(email, password)
+        self.userID = self.userInstance["localId"]
         self.addToStorage()
 
     # Check for valid username (MUST BE 8-30 characters long, only alphanumeric characters)
@@ -70,6 +71,9 @@ class User:
 
     def forgotPassword(self):
         self.auth.send_password_reset_email(self.email)
+
+    def deleteAccount(self):
+        self.auth.delete_user_account(self.userInstance['idToken'])
 
     # def modify_dict(self, d):
     #     new = OrderedDict()
@@ -133,7 +137,7 @@ class Session:
     #         pass
 
     def deleteAccount(self):
-        self.auth.delete_user_account(self.user.userID)
+        self.auth.delete_user_account(self.user.userInstance['idToken'])
 
     def logOut(self):
         self.saveChanges
@@ -195,8 +199,10 @@ class InvalidPhoneNumber(Exception):
 
 # # u = User("Joshua Chio", email, password, cal, 9725911128)
 # # u.addToStorage()
-f = Session('joshuachio10@gmail.com', 'JoshuaChio1020')
-f.deleteAccount
+
+# f = Session('testingAccount@gmail.com', 'testing123')
+# print(f.user.userInstance)
+# f.deleteAccount()
 # print(f.user.username)
 # f.user.setUsername("changed")
 # f.user.calendar.addEvent(testEvente)
