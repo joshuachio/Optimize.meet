@@ -1,4 +1,3 @@
-
 import be_calendar
 import pytest
 import datetime

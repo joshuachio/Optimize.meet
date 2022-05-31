@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "C:\\Users\\joshu\\OneDrive - Georgia Institute of Technology\\Personal\\Calendar",
+        "./backend",
+        "C:\\Users\\joshu\\OneDrive - Georgia Institute of Technology\\Personal\\Calendar",
+        "./Pyrebase4\\pyrebase"
+    ]
+}
