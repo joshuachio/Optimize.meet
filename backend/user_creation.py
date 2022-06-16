@@ -6,9 +6,6 @@ from collections import OrderedDict
 from pyrebase import pyrebase
 from Pyrebase4 import pyrebase
 from be_calendar import Calendar
-from be_events import Event
-from be_tasks import Task
-from be_recurring import Recurring
 from config_key import config_values
 
 
@@ -125,16 +122,22 @@ class Session:
         self.user = pickle.loads(openFile.read())
         openFile.close()
 
-    # def addFriend(self, friend):
-    #     self.friendsList[friend.userID] = friend
+    def acceptFriend(self, friend: User):
+        self.user.friendsList[friend.userID] = friend
 
-    # def removeFriend(self, friend):
-    #     del self.friendsList[friend.userID]
+    def declineFriend(self, friend: User):
+        None
 
-    # def showFriendList(self):
-    #     for friend in self.friendsList.values():
-    #         # display friend list
-    #         pass
+    def sendFriendRequest(self, friend: User):
+        pass
+
+    def removeFriend(self, friend: User):
+        del self.user.friendsList[friend.userID]
+
+    def showFriendList(self):
+        for friend in self.friendsList.values():
+            # display friend list
+            pass
 
     def deleteAccount(self):
         self.auth.delete_user_account(self.user.userInstance['idToken'])

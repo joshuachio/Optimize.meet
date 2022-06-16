@@ -3,7 +3,7 @@ import pytest
 import datetime
 from be_events import Event
 from be_recurring import Recurring
-from be_tasks import Task
+from be_tasks import Task, Bug
 
 
 def test_init():
@@ -50,7 +50,7 @@ def test_init():
 
     assert cal.displayTaskList(datetime.datetime(2022,1,1)) == []
     due = datetime.datetime(2022, 1, 2)
-    task1 = Task("ECE HW", due, "Finish reading the module")
+    task1 = Bug("ECE HW", due)
     assert cal.addTask(task1) == None
     assert cal.displayTaskList(due) == [task1]
     assert cal.dailyDigest(due) == [secEvent, task1]

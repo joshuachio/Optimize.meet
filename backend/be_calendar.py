@@ -3,7 +3,7 @@ import time
 #import calendar as cal
 import datetime
 from be_events import Event
-from be_tasks import Task
+from be_tasks import Task, Bug
 from be_recurring import Recurring
 
 class Calendar:
