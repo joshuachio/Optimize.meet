@@ -3,8 +3,7 @@ import pickle
 
 import jsonpickle
 from collections import OrderedDict
-from pyrebase import pyrebase
-from Pyrebase4 import pyrebase
+import pyrebase
 from be_calendar import Calendar
 from config_key import config_values
 
