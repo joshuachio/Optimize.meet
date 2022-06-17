@@ -5,7 +5,10 @@ import jsonpickle
 from collections import OrderedDict
 import pyrebase
 from be_calendar import Calendar
-from config_key import config_values
+try:
+    from config_key import config_values
+except:
+    pass
 
 
 class User:
