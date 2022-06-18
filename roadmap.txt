@@ -10,15 +10,16 @@ Baseline Release (Target May 30) - Basic Features Done
 - In-Repo Testing
 - Academic Calendars
 - Daily Digest
+--------------------DONE-----------------
+Update 1 (Target Jun 10) - Basic UI Update
+- Simple User Interface Complete
+- Daily Digest Working
 
-Update 1 (Target Jun 10) - Interactive Update
+Update 2 (Target Jun 30) - UI Update
 - Google Maps Integration
 - Adding friends
 - Automated GANTT Charts
 - Auto-Task Fill In
-
-Update 2 (Target Jun 30) - UI Update
-- All misc. features
 - Spotify Integrated
 - Daily Digest GUI
 - Full Aesthetic Build
@@ -26,7 +27,7 @@ Update 2 (Target Jun 30) - UI Update
 Update 3 (Target Jul 20) - Deployment Update
 - Web/Desktop/App Sync Built in
 - Begin application developments
-- Formalize Github Repo
+- Formalize Github Repo (Done)
 
 Final Deployment (Targeting August 1)
 - App, Web, Desktop Free to Go
