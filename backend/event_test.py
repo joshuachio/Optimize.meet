@@ -14,4 +14,15 @@ def test_init():
     recurrance = Recurring("WEEKLY", 2, datetime.datetime(2022, 2, 1))
     event1 = Event(testStartDate, testEndDate, "party on Ethan's bed", "1234 Road", "very fun stuff", recurrance, False)
     assert event1.recurring == recurrance
-    
+    #Meeting Checks
+    meet = Meeting(testStartDate, testEndDate, "call Ethan", "1234 Road", "cry about school",recurrance)
+    assert meet.description == "cry about school"
+    meet1 = Meeting(testStartDate, testEndDate, "call Ethan", "1234 Road", "cry about school",recurrance, False)
+    assert meet1.recurring == recurrance
+    #Course Checks
+    course = Course(testStartDate, testEndDate, "EE222", "Technical Insitutute", "digital signal processing")
+    assert course.description == "digital signal processing"
+    assert course.recurring == None
+    #Personal Checks
+    personal = Personal(testStartDate, testEndDate, "Hang out", "1234 Road", "Work Out")
+    assert personal.description == "Work Out"
