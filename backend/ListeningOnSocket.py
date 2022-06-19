@@ -51,7 +51,7 @@ async def cronch(socket):
 async def main():
     #Open socket
     socket = websockets.serve(cronch, 'localhost', 8765)
-    'ws:://localhost:8765'
+    #'ws:://localhost:8765'
     #Run Loop
     while True:
         for ID in pendings.keys():
