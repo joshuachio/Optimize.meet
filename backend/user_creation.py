@@ -116,13 +116,18 @@ class Session:
         storage = firebase.storage()
 
         # Log in for the user using email and password
-        userInstance = self.auth.sign_in_with_email_and_password(email, password)
-        userID = userInstance['localId']
-        storage.child("users/" + userID + ".bin").download('download.bin', 'download.bin')
-        openFile = open('download.bin', 'rb')
-        # self.user is the User instance corresponding to the login info
-        self.user = pickle.loads(openFile.read())
-        openFile.close()
+        try:
+            userInstance = self.auth.sign_in_with_email_and_password(email, password)
+            userID = userInstance['localId']
+            storage.child("users/" + userID + ".bin").download('download.bin', 'download.bin')
+            openFile = open('download.bin', 'rb')
+            # self.user is the User instance corresponding to the login info
+            self.user = pickle.loads(openFile.read())
+            self.userID = userID
+            self.active = True
+            openFile.close()
+        except:
+            return None
 
     def acceptFriend(self, friend: User):
         self.user.friendsList[friend.userID] = friend
