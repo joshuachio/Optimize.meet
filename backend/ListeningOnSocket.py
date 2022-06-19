@@ -32,6 +32,7 @@ def websocket_process(msg):
         for sesh in activesessions:
             if sesh.userID == msg['userID']:
                 activesessions.remove(sesh)
+                os.remove()
                 return 0
     #Update
     #Update Format: {'type': 'update', 'userID': 'userID', 'update': 'update'}
@@ -50,12 +51,13 @@ async def cronch(socket):
 async def main():
     #Open socket
     socket = websockets.serve(cronch, 'localhost', 8765)
+    'ws:://localhost:8765'
     #Run Loop
     while True:
         for ID in pendings.keys():
             sesh = activesessions[ID]
             sesh.update(pendings[ID])
-
+        await asyncio.sleep(1)
 
 if __name__ == '__main()__':
     asyncio.get_event_loop.run_forever()
