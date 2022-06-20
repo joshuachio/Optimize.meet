@@ -23,5 +23,12 @@ def login():
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             error = 'Invalid'
         else:
-            return redirect(url_for('calendar'))
+            sesh = user_creation.Session(request.form['username'], request.form['password'])
+            if not sesh:
+                errorstate = 1
+                return
+            else:
+                sesh.active = True
+                activesessions[sesh] = sesh.userID
+                return redirect(url_for('calendar'))
     return render_template('login.html', error=error)
