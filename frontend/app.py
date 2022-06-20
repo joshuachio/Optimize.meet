@@ -89,11 +89,11 @@ def register():
             password = request.form['password']
             telephone = request.form['phone']
 
-            Create empty calendar
-            calendar = be_calendar.Calendar()
+            # Create empty calendar
+            # calendar = be_calendar.Calendar()
 
-            #Create a new user object and add them to firebase storage
-            newUser = user_creation.User(username, email, password, calendar, telephone)
+            # #Create a new user object and add them to firebase storage
+            # newUser = user_creation.User(username, email, password, calendar, telephone)
             newUser.addToStorage()
             
             #Redirect to the login page
