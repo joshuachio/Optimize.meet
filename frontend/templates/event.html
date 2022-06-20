@@ -6,8 +6,8 @@
         <div class="container">
             <h3>Event Name</h3>
             <!-- Event name -->
-            <input autocomplete="on" autofocus name="name" 
-            placeholder="Name" type="text">
+            <input autocomplete="on" autofocus name="name" required
+            placeholder="Name" type="text"> 
 
             <h3>Description</h3>
             <!-- Description -->
@@ -19,13 +19,13 @@
         <div class="container"> 
             <h3>Start time</h3>
             <!-- Start time -->
-            <input type="datetime-local" id="start-time"
+            <input type="datetime-local" id="start-time" required
                 name="start-time"
                 min="2020-01-01T00:00" max="2030-12-31T00:00">
 
             <h3>End time</h3>
             <!-- End time -->
-            <input type="datetime-local" id="end-time"
+            <input type="datetime-local" id="end-time" required
                 name="end-time"
                 min="2020-01-01T00:00" max="2030-12-31T00:00">
         </div>

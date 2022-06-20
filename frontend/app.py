@@ -1,8 +1,10 @@
 import asyncio
+from tracemalloc import start
 from flask import Flask, render_template, redirect, url_for, request
 import asyncio
 import os
 import json
+from datetime import datetime
 from ..backend import be_events
 
 activesessions = {}
@@ -16,17 +18,16 @@ def home():
 @app.route("/event", methods=['POST', 'GET'])
 def event():
     if request.method == 'POST':
-        if not request.form['name']:
-            print('wrong')
         eventName = request.form['name']
-        startTime = request.form['start-time']
-        endTime = request.form['end-time']
+        startTime = datetime.strptime(request.form['start-time'], "%Y-%m-%dT%H:%M")
+        endTime = datetime.strptime(request.form['end-time'], "%Y-%m-%dT%H:%M")
         location = request.form['location']
         description = request.form['description']
-
+        newEvent = be_events.Event(startTime, endTime, eventName, location, description)
+        print(newEvent)
         frequency = request.form['recurring']
-        stopRepeat = request.form['stop-time']
-
+        if request.form['stop-time']:
+            stopRepeat = datetime.strptime(request.form['stop-time'], "%Y-%m-%dT%H:%M")
 
 
         print(request.form['name'])
