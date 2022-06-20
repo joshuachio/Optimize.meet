@@ -94,7 +94,7 @@ def register():
 
             # #Create a new user object and add them to firebase storage
             # newUser = user_creation.User(username, email, password, calendar, telephone)
-            newUser.addToStorage()
+            # newUser.addToStorage()
             
             #Redirect to the login page
             return redirect(url_for('login'))
