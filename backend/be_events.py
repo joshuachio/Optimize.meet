@@ -1,5 +1,5 @@
 import datetime
-from be_recurring import Recurring
+# from be_recurring import Recurring
 
 repeat = {
    1: datetime.timedelta(days=1),
@@ -8,7 +8,7 @@ repeat = {
 
 class Event:
    def __init__(self, startDateTime: datetime.datetime, endDateTime: datetime.datetime,
-                event_name: str, location, description: str = None, recurring: Recurring = None, isPrivate: bool = True):
+                event_name: str, location, description: str = None, recurring = None, isPrivate: bool = True):
       self.setStartDatetime(startDateTime)
       self.setEndDatetime(endDateTime)
       self.event_name = event_name

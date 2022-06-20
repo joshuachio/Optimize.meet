@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <form action="/event" method="post">
+        <div class="container">
+            <h3>Event Name</h3>
+            <!-- Event name -->
+            <input autocomplete="on" autofocus name="name" 
+            placeholder="Name" type="text">
+
+            <h3>Description</h3>
+            <!-- Description -->
+            <input autocomplete="on" autofocus name="description" 
+                placeholder="Description" type="text"
+                size="100">
+        </div>
+
+        <div class="container"> 
+            <h3>Start time</h3>
+            <!-- Start time -->
+            <input type="datetime-local" id="start-time"
+                name="start-time"
+                min="2020-01-01T00:00" max="2030-12-31T00:00">
+
+            <h3>End time</h3>
+            <!-- End time -->
+            <input type="datetime-local" id="end-time"
+                name="end-time"
+                min="2020-01-01T00:00" max="2030-12-31T00:00">
+        </div>
+
+        <div class="container"> 
+            <h3>Location</h3>
+            <!-- Location -->
+            <input autocomplete="on" autofocus name="location" 
+                placeholder="Location" type="text">
+
+            <h3>Recurring Frequency (Optional)</h3>
+            <!-- Select Recurring -->
+            <select name="recurring">
+                <option disable selected>Frequency</option>
+                <option>DAILY</option>
+                <option>WEEKLY</option>
+            </select>
+
+            <h3>When to stop recurring</h3>
+            <!-- Stop Recurring -->
+            <input type="datetime-local" id="stop-time"
+                name="stop-time"
+                min="2020-01-01T00:00" max="2030-12-31T00:00">
+        </div>
+
+
+
+        <!-- Submit event -->
+        <input type="submit" value="Create Event">
+    </form>
+
+{% endblock %}

@@ -3,14 +3,36 @@ from flask import Flask, render_template, redirect, url_for, request
 import asyncio
 import os
 import json
+from ..backend import be_events
 
 activesessions = {}
 timeout = 600
 app = Flask(__name__)
 
-@app.route("/calendar")
-def calendar():
-    return render_template("calendar.html")
+@app.route("/home")
+def home():
+    return render_template("daily.html")
+
+@app.route("/event", methods=['POST', 'GET'])
+def event():
+    if request.method == 'POST':
+        if not request.form['name']:
+            print('wrong')
+        eventName = request.form['name']
+        startTime = request.form['start-time']
+        endTime = request.form['end-time']
+        location = request.form['location']
+        description = request.form['description']
+
+        frequency = request.form['recurring']
+        stopRepeat = request.form['stop-time']
+
+
+
+        print(request.form['name'])
+        return redirect(url_for('home'))
+    return render_template("event.html")
+
 
 @app.route('/user/<username>')
 def profile(username):

@@ -12,7 +12,7 @@ byDay = {
 
 class Recurring:
 
-    def __init__(self, freq: str, interval: int, endDate: datetime.datetime, byDay: list[int] = None, count = None):
+    def __init__(self, freq: str, endDate: datetime.datetime, interval: int = 1, byDay: list[int] = None, count = None):
         self.setFreq(freq)
         self.interval = interval
         self.endDate = endDate
