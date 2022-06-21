@@ -1,9 +1,10 @@
-import be_calendar
+from context import backend
+from backend import be_calendar
 import pytest
 import datetime
-from be_events import Event
-from be_recurring import Recurring
-from be_tasks import Task, Bug
+from backend import Event
+from backend import Recurring
+from backend import Task, Bug
 
 
 def test_init():
