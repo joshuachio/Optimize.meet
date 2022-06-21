@@ -1,4 +1,4 @@
-from be_recurring import Recurring
+from Source import Recurring
 import pytest
 import datetime
 

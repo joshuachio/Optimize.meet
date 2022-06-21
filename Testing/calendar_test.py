@@ -3,9 +3,7 @@ from context import Source
 from Source import be_calendar
 import pytest
 import datetime
-from Source import Event
-from Source import Recurring
-from backend import Bug
+from Source import Event, Recurring, Bug
 
 
 def test_init():

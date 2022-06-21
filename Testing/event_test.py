@@ -1,5 +1,6 @@
-from be_events import Event, Course, Meeting, Personal
-from be_recurring import Recurring
+from context import Event, Recurring, Bug, Meeting, Course, Personal
+#from be_events import Event, Course, Meeting, Personal
+#from be_recurring import Recurring
 import pytest
 import datetime
 
