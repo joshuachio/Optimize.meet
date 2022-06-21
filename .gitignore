@@ -1,7 +1,10 @@
 env
+venv
+virtualenv
 config.yaml
 test.py
 pycache
+__pycache__
 DS_Store
 pytest_cache
 Pyrebase4
