@@ -5,8 +5,7 @@ import os
 import json
 from datetime import datetime
 
-from Source import be_events
-from Source  import be_recurring, user_creation
+from Source import be_calendar, be_events, be_recurring, user_creation
 
 activesessions = {}
 timeout = 600
@@ -66,17 +65,14 @@ def profile(username):
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid'
+        sesh = user_creation.Session(request.form['username'], request.form['password'])
+        if not sesh:
+            errorstate = 1
+            return
         else:
-            sesh = user_creation.Session(request.form['username'], request.form['password'])
-            if not sesh:
-                errorstate = 1
-                return
-            else:
-                sesh.active = True
-                activesessions[sesh] = sesh.userID
-                return redirect(url_for('home'))
+            sesh.active = True
+            activesessions[sesh] = sesh.userID
+            return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -91,11 +87,11 @@ def register():
             telephone = request.form['phone']
 
             # Create empty calendar
-            # calendar = be_calendar.Calendar()
+            calendar = be_calendar.Calendar()
 
             # #Create a new user object and add them to firebase storage
-            # newUser = user_creation.User(username, email, password, calendar, telephone)
-            # newUser.addToStorage()
+            newUser = user_creation.User(username, email, password, calendar, telephone)
+            newUser.addToStorage()
             
             #Redirect to the login page
             return redirect(url_for('login'))
