@@ -65,10 +65,15 @@ def profile(username):
 def login():
     error = None
     if request.method == 'POST':
+        #Tries to create a login session with the username and password provided
         sesh = user_creation.Session(request.form['username'], request.form['password'])
+
+        #If that account is not valid, then error
         if not sesh:
             errorstate = 1
             return
+
+        #Active session with the login
         else:
             sesh.active = True
             activesessions[sesh] = sesh.userID
