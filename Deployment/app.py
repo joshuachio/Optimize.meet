@@ -5,7 +5,7 @@ import os
 import json
 from datetime import datetime
 
-from Source import be_calendar, be_events, be_recurring, user_creation
+# from Source import be_calendar, be_events, be_recurring, user_creation
 
 activesessions = {}
 timeout = 600
@@ -57,9 +57,13 @@ def event():
     return render_template("event.html")
 
 
-@app.route('/user/<username>')
-def profile(username):
-    return f'{username}\'s profile'
+@app.route('/user/', methods=['POST'])
+def profile():
+    if request.method == 'POST':
+        #Needs to get the current logged in user session
+        currUser = sesh.user
+        return render_template("profile.html", username=currUser.username, email=currUser.email, phone=currUser.phoneNumber)
+    return render_template("error.html")
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
