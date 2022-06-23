@@ -6,7 +6,6 @@ import pytest
 import datetime
 
 
-
 def test_init():
     testStartDate = datetime.datetime(2022, 1, 1, 19, 0) #9 am Jan 1st, 2022
     testEndDate = datetime.datetime(2022, 1, 1, 11, 0) #11 am Jan 1st, 2022
