@@ -4,8 +4,7 @@ import asyncio
 import os
 import json
 from datetime import datetime
-from dcontext import Source
-from Source import be_calendar, be_events, be_recurring, user_creation
+import be_calendar, be_events, be_recurring, user_creation
 activesessions = {}
 timeout = 600
 app = Flask(__name__)
