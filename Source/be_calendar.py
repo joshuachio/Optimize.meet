@@ -2,7 +2,10 @@ import time
 # import numpy
 #import calendar as cal
 import datetime
-from be_events import Event
+import sys
+import os
+sys.path.append('../Calendar')
+from Source.be_events import Event
 from be_tasks import Task, Bug
 from be_recurring import Recurring
 

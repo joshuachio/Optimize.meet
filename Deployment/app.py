@@ -4,8 +4,9 @@ import asyncio
 import os
 import json
 from datetime import datetime
-
-# from Source import be_calendar, be_events, be_recurring, user_creation
+import sys
+sys.path.append('../Calendar')
+from Source import be_calendar, be_events, be_recurring, user_creation
 
 activesessions = {}
 timeout = 600
