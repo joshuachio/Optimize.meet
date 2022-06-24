@@ -12,3 +12,4 @@ class Bug(be_tasks.Task):
 
     def addUser(self, userToAdd: user.User):
         self.collaboratorList[userToAdd.userID] = userToAdd
+
