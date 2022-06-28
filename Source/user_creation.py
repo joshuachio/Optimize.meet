@@ -1,12 +1,14 @@
 import datetime
 import pickle
+import sys
+sys.path.append('../Calendar')
 import collections
 import jsonpickle
 from collections import OrderedDict
 import pyrebase
-from be_calendar import Calendar
+from .be_calendar import Calendar
 try:
-    from config_key import config_values
+    from .config_key import config_values
 except:
     pass
 
@@ -127,7 +129,7 @@ class Session:
             self.active = True
             openFile.close()
         except:
-            return None
+            raise InvalidLogin
 
     def acceptFriend(self, friend: User):
         self.user.friendsList[friend.userID] = friend
@@ -171,6 +173,12 @@ class InvalidPassword(Exception):
 class InvalidPhoneNumber(Exception):
 
     def __init__(self, message='Invalid Phone Number (MUST be a valid 10 digit number)'):
+        super().__init__(message)
+
+#Invalid login
+class InvalidLogin(Exception):
+
+    def __init__(self, message='Invalid Login'):
         super().__init__(message)
 
 # messy testing stuff disregard

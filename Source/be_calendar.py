@@ -5,9 +5,9 @@ import datetime
 import sys
 import os
 sys.path.append('../Calendar')
-from Source.be_events import Event
-from be_tasks import Task, Bug
-from be_recurring import Recurring
+from .be_events import Event
+from .be_tasks import Task
+# from Source.be_recurring import Recurring
 
 class Calendar:
    def __init__(self):
