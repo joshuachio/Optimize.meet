@@ -1,9 +1,7 @@
-from Source import Task
-from context import Source
-from Source import be_calendar
+from .context import Source
+from Source import be_calendar, be_events, be_recurring, be_tasks
 import pytest
 import datetime
-from Source import Event, Recurring, Bug
 
 
 def test_init():
@@ -19,7 +17,7 @@ def test_init():
     #Ensures that an event can be added properly. 
     firstTime = datetime.datetime(2022,1, 1, 9)
     sTime = datetime.datetime(2022,1, 1, 11)
-    testEvent = Event(firstTime, sTime, "First Event", "1927 Orrington Avenue", "Video Call")
+    testEvent = be_events.Event(firstTime, sTime, "First Event", "1927 Orrington Avenue", "Video Call")
     assert cal.addEvent(testEvent) == None
     assert cal.myCal[2022][1][1][0] == testEvent
     assert cal.myCal[2022][1][1][0].description == "Video Call"
@@ -28,8 +26,8 @@ def test_init():
 
     secondTime = datetime.datetime(2022,1, 2, 13)
     tTime = datetime.datetime(2022,1, 2, 15)
-    recurrance = Recurring("DAILY", 2, datetime.datetime(2022, 2, 1))
-    secEvent = Event(secondTime, tTime, "Nap Time", "My bed", "Sleeping", recurrance)
+    recurrance = be_recurring.Recurring("DAILY", datetime.datetime(2022, 2, 1), 2)
+    secEvent = be_events.Event(secondTime, tTime, "Nap Time", "My bed", "Sleeping", recurrance)
     assert cal.addEvent(secEvent) == None
     assert cal.myCal[2022][1][8][0] == secEvent
     assert cal.myCal[2022][1][2][0] == secEvent
@@ -37,8 +35,8 @@ def test_init():
 
     thirdTime = datetime.datetime(2022, 3, 2, 13)
     thTime = datetime.datetime(2022, 3, 2, 15)
-    recurrance2 = Recurring("WEEKLY", 1, datetime.datetime(2022, 4, 2), [1, 3, 4])
-    thirdEvent = Event(thirdTime, thTime, "Sleep", "My bed", "Napping", recurrance2)
+    recurrance2 = be_recurring.Recurring("WEEKLY", datetime.datetime(2022, 4, 2), 1, [1, 3, 4])
+    thirdEvent = be_events.Event(thirdTime, thTime, "Sleep", "My bed", "Napping", recurrance2)
     assert cal.addEvent(thirdEvent) == None
     assert cal.myCal[2022][3][2][0] == thirdEvent
     assert cal.myCal[2022][3][3][0] == thirdEvent
@@ -50,10 +48,10 @@ def test_init():
 
     assert cal.displayTaskList(datetime.datetime(2022,1,1)) == []
     due = datetime.datetime(2022, 1, 2)
-    task1 = Bug("ECE HW", due)
+    task1 = be_tasks.Task("ECE HW", due)
     assert cal.addTask(task1) == None
     assert cal.displayTaskList(due) == [task1]
-    assert cal.dailyDigest(due) == [secEvent, task1]
+    assert cal.dailyDigest(due) == [secEvent]
     assert cal.removeTask(task1) == None
     assert cal.displayTaskList(due) == []
     assert cal.taskList[due.date] == []

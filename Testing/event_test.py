@@ -1,4 +1,4 @@
-from context import Source
+from .context import Source
 #import Source
 from Source.be_events import Event, Course, Meeting, Personal
 from Source.be_recurring import Recurring
