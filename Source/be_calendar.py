@@ -214,12 +214,12 @@ class Calendar:
       #       #We can just return the taskList so it can get called by the frontend? 
       #       pass
 
-   def dailyDigest(self, today: datetime.date, showEvents = True, showTasks = True):
+   def dailyDigest(self, today: datetime.date = datetime.date.today(), showEvents = True, showTasks = True):
       # today = datetime.date(datetime.date.today().year, datetime.date.today().month, datetime.date.today().day)
-      if today.date not in self.taskList:
+      if today not in self.taskList:
          tasks = []
       else:
-         tasks = self.taskList[today.date]
+         tasks = self.taskList[today]
       events = self.myCal[today.year][today.month][today.day]
       if not showEvents or not self.taskList:
          return tasks

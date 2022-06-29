@@ -2,31 +2,39 @@
 
 {% block body %}
 
-  <div class="container">
-    <h1>Register</h1>
+<section class="vh-50" >
+  <div class="container py-5 h-50">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">Register</h3>
+            <form action="/register" method="post">
 
-    <br>
+              <div class="form-outline mb-4">
+                <input type="text" name="username" class="form-control form-control-lg" placeholder="Username"/>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" />
+              </div>
 
-    <form action="/register" method="post">
-        <input type="text" placeholder="Username" name="username" value="{{
-            request.form.username }}" autocomplete="on" autofocus name="name" required>
+              <div class="form-outline mb-4">
+                <input type="tel" name="phone" class="form-control form-control-lg" placeholder="Phone Number"/>
+              </div>
 
-        <input type="text" placeholder="Email" name="email" value="{{
-            request.form.email }}" autocomplete="on" autofocus name="name" required>
+              <div class="form-outline mb-4">
+                <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"/>
+              </div>
 
-        <input type="text" placeholder="Phone" name="phone" value="{{
-            request.form.phone }}" autocomplete="on" autofocus name="name">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
 
-        <input type="password" placeholder="Password" name="password" value="{{
-            request.form.password }}" autocomplete="on" autofocus name="name" required>
-        
-      <input class="btn btn-default" type="submit" value="Register">
-    </form>
-
-    {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }}
-    {% endif %}
-
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
 {% endblock %}

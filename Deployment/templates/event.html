@@ -2,55 +2,63 @@
 
 {% block body %}
 
-    <form action="/event" method="post">
-        <div class="container">
-            <h3>Event Name</h3>
-            <!-- Event name -->
-            <input autocomplete="on" autofocus name="name" required
-            placeholder="Name" type="text"> 
+<section class="vh-50" >
+    <div class="container py-5 h-50">
+      <div class="row d-flex justify-content-center align-items-center h-50">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <h3 class="mb-5">Create an Event</h3>
+              <form action="/task" method="post">
+  
+                <div class="form-outline mb-4">
+                  <input type="text" name="name" class="form-control form-control-lg" placeholder="Event Name"/>
+                </div>
+    
+                <div class="form-outline mb-4">
+                  <input type="text" name="description" class="form-control form-control-lg" placeholder="Description" />
+                </div>
+  
+                <div class="form-outline mb-4">
+                  <input type="datetime-local" id="start-time" required
+                  name="start-time" class="form-control form-control-lg"/>
+                  <label class="form-label" for="start-time">Start Time</label>
+                </div>
+                
 
-            <h3>Description</h3>
-            <!-- Description -->
-            <input autocomplete="on" autofocus name="description" 
-                placeholder="Description" type="text"
-                size="100">
+                <div class="form-outline mb-4">
+                    <input type="datetime-local" id="start-time" required
+                    name="end-time" class="form-control form-control-lg"/>
+                    <label class="form-label" for="end-time">End Time</label>
+                  </div>
 
-            <h3>Start time</h3>
-            <!-- Start time -->
-            <input type="datetime-local" id="start-time" required
-                name="start-time"
-                min="2020-01-01T00:00" max="2030-12-31T00:00">
+                <div class="form-outline mb-4">
+                    <input type="text" name="location" class="form-control form-control-lg" placeholder="Location"/>
+                </div>
 
-            <h3>End time</h3>
-            <!-- End time -->
-            <input type="datetime-local" id="end-time" required
-                name="end-time"
-                min="2020-01-01T00:00" max="2030-12-31T00:00">
+                <div class="form-outline mb-4">
+                    <select name="recurring" class="form-control form-control-lg">
+                        <option disable selected>Frequency (Optional)</option>
+                        <option>DAILY</option>
+                        <option>WEEKLY</option>
+                    </select>
+                    <!-- <input type="text" name="name" class="form-control form-control-lg" placeholder="Task Name"/> -->
+                </div>
 
-            <h3>Location</h3>
-            <!-- Location -->
-            <input autocomplete="on" autofocus name="location" 
-                placeholder="Location" type="text">
-
-            <h3>Recurring Frequency (Optional)</h3>
-            <!-- Select Recurring -->
-            <select name="recurring">
-                <option disable selected>Frequency</option>
-                <option>DAILY</option>
-                <option>WEEKLY</option>
-            </select>
-
-            <h3>When to stop recurring</h3>
-            <!-- Stop Recurring -->
-            <input type="datetime-local" id="stop-time"
-                name="stop-time"
-                min="2020-01-01T00:00" max="2030-12-31T00:00">
+                <div class="form-outline mb-4">
+                    <input type="datetime-local" id="start-time" required
+                    name="stop-time" class="form-control form-control-lg"/>
+                    <label class="form-label" for="stop-time">When to stop repeating</label>
+                  </div>
+  
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Add Event</button>
+  
+              </form>
+            </div>
+          </div>
         </div>
-
-
-
-        <!-- Submit event -->
-        <input type="submit" value="Create Event">
-    </form>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}

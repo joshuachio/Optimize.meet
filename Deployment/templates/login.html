@@ -1,8 +1,37 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<section class="vh-50" >
+  <div class="container py-5 h-50">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
 
-  <div class="container">
+            <h3 class="mb-5">Sign in</h3>
+            <form action="/login" method="post">
+              <div class="form-outline mb-4">
+                <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"/>
+                <!-- <label class="form-label" for="typeEmailX-2">Email</label> -->
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" />
+                <!-- <label class="form-label" for="typePasswordX-2">Password</label> -->
+              </div>
+              {% if error %}
+              <p class="error"><strong>Error:</strong> {{ error }}
+              {% endif %}
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- <div class="container">
     <h1>Login</h1>
 
     <br>
@@ -19,12 +48,10 @@
 
     <form action="/register" method="get">
       <input class="btn btn-default" type="submit" value="Register">
-    </form>
+    </form> -->
 
-    {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }}
-    {% endif %}
 
-  </div>
+
+  <!-- </div> -->
 
 {% endblock %}
