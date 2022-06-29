@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1 class="page-header" style="text-align: center;">Welcome {{ g.user.user.username }}! Here is your daily digest</h1>
+
+    <p>{{ g.user.user.calendar.dailyDigest() }}</p>
+
+    <form action="/event" method="get">
+        <input class="btn btn-default" type="submit" value="Add Event">
+    </form>
+
+    <form action="/task" method="get">
+        <input class="btn btn-default" type="submit" value="Add Task">
+    </form>
+
+{% endblock %}
