@@ -2,11 +2,11 @@ from tracemalloc import start
 from flask import Flask, render_template, redirect, url_for, request, session, g
 import asyncio
 from datetime import datetime
-from ..Source.be_calendar import Calendar
-from ..Source.be_events import Event
-from ..Source.be_recurring import Recurring
-from ..Source.be_tasks import Task
-from ..Source.user_creation import User, Session
+from .Source.be_calendar import Calendar
+from .Source.be_events import Event
+from .Source.be_recurring import Recurring
+from .Source.be_tasks import Task
+from .Source.user_creation import User, Session
 
 activesessions = {}
 timeout = 600

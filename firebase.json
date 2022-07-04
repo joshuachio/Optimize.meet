@@ -1,0 +1,16 @@
+{
+    "hosting": {
+        "public": "static",
+        "ignore": [
+            "**/node_modules/**",
+            "firebase.json",
+            "**/.*"
+        ],
+        "rewrites": [{
+            "source": "**",
+            "run": {
+                "serviceId": "flask-fire"
+            }
+        }]
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "description": "[![Unit Tests](https://github.com/joshuachio/Calendar/actions/workflows/python-app.yml/badge.svg)](https://github.com/joshuachio/Calendar/actions/workflows/python-app.yml)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuachio/calendar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuachio/calendar/issues"
+  },
+  "homepage": "https://github.com/joshuachio/calendar#readme"
+}
