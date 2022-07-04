@@ -1,7 +1,6 @@
-from .context import Source
-#import Source
-from Source.be_events import Event, Course, Meeting, Personal
-from Source.be_recurring import Recurring
+from .context import Server
+from Server.Source.be_events import Event, Course, Meeting, Personal
+from Server.Source.be_recurring import Recurring
 import pytest
 import datetime
 

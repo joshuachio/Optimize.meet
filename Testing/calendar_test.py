@@ -1,5 +1,5 @@
-from .context import Source
-from Source import be_calendar, be_events, be_recurring, be_tasks
+from .context import Server
+from Server.Source import be_calendar, be_events, be_recurring, be_tasks
 import pytest
 import datetime
 
