@@ -13,3 +13,5 @@ firebase_testing/download.bin
 firebase_testing/upload.bin
 user_creation_test.py
 node_modules
+upload
+download
